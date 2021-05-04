@@ -1,0 +1,467 @@
+block/qed.c:    return acb->common.bs->opaque;
+block/qed.c:    BlockCompletionFunc *cb = acb->common.cb;
+block/qed.c:    void *user_opaque = acb->common.opaque;
+block/qed.c:    int ret = acb->bh_ret;
+block/qed.c:    qemu_iovec_destroy(&acb->cur_qiov);
+block/qed.c:    qed_unref_l2_cache_entry(acb->request.l2_table);
+block/qed.c:    if (acb->flags & QED_AIOCB_ZERO) {
+block/qed.c:        qemu_vfree(acb->qiov->iov[0].iov_base);
+block/qed.c:        acb->qiov->iov[0].iov_base = NULL;
+block/qed.c:    acb->bh_ret = ret;
+block/qed.c:    aio_bh_schedule_oneshot(bdrv_get_aio_context(acb->common.bs),
+block/qed.c:    CachedL2Table *l2_table = acb->request.l2_table;
+block/qed.c:    acb->request.l2_table = qed_find_l2_cache_entry(&s->l2_cache, l2_offset);
+block/qed.c:    assert(acb->request.l2_table != NULL);
+block/qed.c:    index = qed_l1_index(s, acb->cur_pos);
+block/qed.c:    s->l1_table->offsets[index] = acb->request.l2_table->offset;
+block/qed.c:    bool need_alloc = acb->find_cluster_ret == QED_CLUSTER_L1;
+block/qed.c:        qed_unref_l2_cache_entry(acb->request.l2_table);
+block/qed.c:        acb->request.l2_table = qed_new_l2_table(s);
+block/qed.c:    index = qed_l2_index(s, acb->cur_pos);
+block/qed.c:    qed_update_l2_table(s, acb->request.l2_table->table, index, acb->cur_nclusters,
+block/qed.c:        qed_write_l2_table(s, &acb->request, 0, s->table_nelems, true,
+block/qed.c:        qed_write_l2_table(s, &acb->request, index, acb->cur_nclusters, false,
+block/qed.c:    qed_aio_write_l2_update(acb, ret, acb->cur_cluster);
+block/qed.c:    uint64_t offset = acb->cur_cluster +
+block/qed.c:                      qed_offset_into_cluster(s, acb->cur_pos);
+block/qed.c:    trace_qed_aio_write_main(s, acb, ret, offset, acb->cur_qiov.size);
+block/qed.c:    if (acb->find_cluster_ret == QED_CLUSTER_FOUND) {
+block/qed.c:                    &acb->cur_qiov, acb->cur_qiov.size / BDRV_SECTOR_SIZE,
+block/qed.c:    uint64_t start = acb->cur_pos + acb->cur_qiov.size;
+block/qed.c:    uint64_t offset = acb->cur_cluster +
+block/qed.c:                      qed_offset_into_cluster(s, acb->cur_pos) +
+block/qed.c:                      acb->cur_qiov.size;
+block/qed.c:    uint64_t start = qed_start_of_cluster(s, acb->cur_pos);
+block/qed.c:    uint64_t len = qed_offset_into_cluster(s, acb->cur_pos);
+block/qed.c:    trace_qed_aio_write_prefill(s, acb, start, len, acb->cur_cluster);
+block/qed.c:    qed_copy_from_backing_file(s, start, len, acb->cur_cluster,
+block/qed.c:    acb->cur_nclusters = qed_bytes_to_clusters(s,
+block/qed.c:            qed_offset_into_cluster(s, acb->cur_pos) + len);
+block/qed.c:    qemu_iovec_concat(&acb->cur_qiov, acb->qiov, acb->qiov_offset, len);
+block/qed.c:    if (acb->flags & QED_AIOCB_ZERO) {
+block/qed.c:        if (acb->find_cluster_ret == QED_CLUSTER_ZERO) {
+block/qed.c:        acb->cur_cluster = qed_alloc_clusters(s, acb->cur_nclusters);
+block/qed.c:    if (acb->flags & QED_AIOCB_ZERO) {
+block/qed.c:        struct iovec *iov = acb->qiov->iov;
+block/qed.c:            iov->iov_base = qemu_try_blockalign(acb->common.bs, iov->iov_len);
+block/qed.c:    acb->cur_cluster = offset;
+block/qed.c:    qemu_iovec_concat(&acb->cur_qiov, acb->qiov, acb->qiov_offset, len);
+block/qed.c:    acb->find_cluster_ret = ret;
+block/qed.c:    BlockDriverState *bs = acb->common.bs;
+block/qed.c:    offset += qed_offset_into_cluster(s, acb->cur_pos);
+block/qed.c:    qemu_iovec_concat(&acb->cur_qiov, acb->qiov, acb->qiov_offset, len);
+block/qed.c:        qemu_iovec_memset(&acb->cur_qiov, 0, 0, acb->cur_qiov.size);
+block/qed.c:        qed_read_backing_file(s, acb->cur_pos, &acb->cur_qiov,
+block/qed.c:                              &acb->backing_qiov, qed_aio_next_io_cb, acb);
+block/qed.c:                   &acb->cur_qiov, acb->cur_qiov.size / BDRV_SECTOR_SIZE,
+block/qed.c:    QEDFindClusterFunc *io_fn = (acb->flags & QED_AIOCB_WRITE) ?
+block/qed.c:    trace_qed_aio_next_io(s, acb, ret, acb->cur_pos + acb->cur_qiov.size);
+block/qed.c:    if (acb->backing_qiov) {
+block/qed.c:        qemu_iovec_destroy(acb->backing_qiov);
+block/qed.c:        g_free(acb->backing_qiov);
+block/qed.c:        acb->backing_qiov = NULL;
+block/qed.c:    acb->qiov_offset += acb->cur_qiov.size;
+block/qed.c:    acb->cur_pos += acb->cur_qiov.size;
+block/qed.c:    qemu_iovec_reset(&acb->cur_qiov);
+block/qed.c:    if (acb->cur_pos >= acb->end_pos) {
+block/qed.c:    qed_find_cluster(s, &acb->request,
+block/qed.c:                      acb->cur_pos, acb->end_pos - acb->cur_pos,
+block/qed.c:    acb->flags = flags;
+block/qed.c:    acb->qiov = qiov;
+block/qed.c:    acb->qiov_offset = 0;
+block/qed.c:    acb->cur_pos = (uint64_t)sector_num * BDRV_SECTOR_SIZE;
+block/qed.c:    acb->end_pos = acb->cur_pos + nb_sectors * BDRV_SECTOR_SIZE;
+block/qed.c:    acb->backing_qiov = NULL;
+block/qed.c:    acb->request.l2_table = NULL;
+block/qed.c:    qemu_iovec_init(&acb->cur_qiov, qiov->niov);
+block/qed.c:    return &acb->common;
+block/sheepdog.c:    acb->nr_pending++;
+block/sheepdog.c:    acb->s = s;
+block/sheepdog.c:    acb->qiov = qiov;
+block/sheepdog.c:    acb->sector_num = sector_num;
+block/sheepdog.c:    acb->nb_sectors = nb_sectors;
+block/sheepdog.c:    acb->coroutine = qemu_coroutine_self();
+block/sheepdog.c:    acb->ret = 0;
+block/sheepdog.c:    acb->nr_pending = 0;
+block/sheepdog.c:    acb->min_affect_data_idx = acb->sector_num * BDRV_SECTOR_SIZE / object_size;
+block/sheepdog.c:    acb->max_affect_data_idx = (acb->sector_num * BDRV_SECTOR_SIZE +
+block/sheepdog.c:                              acb->nb_sectors * BDRV_SECTOR_SIZE) / object_size;
+block/sheepdog.c:    acb->min_dirty_data_idx = UINT32_MAX;
+block/sheepdog.c:    acb->max_dirty_data_idx = 0;
+block/sheepdog.c:    acb->aiocb_type = type;
+block/sheepdog.c:    switch (acb->aiocb_type) {
+block/sheepdog.c:                acb->max_dirty_data_idx = MAX(idx, acb->max_dirty_data_idx);
+block/sheepdog.c:                acb->min_dirty_data_idx = MIN(idx, acb->min_dirty_data_idx);
+block/sheepdog.c:        ret = qemu_co_recvv(fd, acb->qiov->iov, acb->qiov->niov,
+block/sheepdog.c:        acb->ret = -EIO;
+block/sheepdog.c:    if (!--acb->nr_pending) {
+block/sheepdog.c:        aio_co_wake(acb->coroutine);
+block/sheepdog.c:    if (acb->aiocb_type == AIOCB_WRITE_UDATA && is_data_obj(aio_req->oid)) {
+block/sheepdog.c:        add_aio_request(s, aio_req, acb->qiov->iov, acb->qiov->niov,
+block/sheepdog.c:                        acb->aiocb_type);
+block/sheepdog.c:    BDRVSheepdogState *s = acb->s;
+block/sheepdog.c:    mn = acb->min_dirty_data_idx;
+block/sheepdog.c:    mx = acb->max_dirty_data_idx;
+block/sheepdog.c:        ++acb->nr_pending;
+block/sheepdog.c:        acb->min_dirty_data_idx = UINT32_MAX;
+block/sheepdog.c:        acb->max_dirty_data_idx = 0;
+block/sheepdog.c:        if (--acb->nr_pending) {
+block/sheepdog.c:    unsigned long len, done = 0, total = acb->nb_sectors * BDRV_SECTOR_SIZE;
+block/sheepdog.c:    BDRVSheepdogState *s = acb->s;
+block/sheepdog.c:    if (acb->aiocb_type == AIOCB_WRITE_UDATA && s->is_snapshot) {
+block/sheepdog.c:            acb->ret = -EIO;
+block/sheepdog.c:    idx = acb->sector_num * BDRV_SECTOR_SIZE / object_size;
+block/sheepdog.c:    offset = (acb->sector_num * BDRV_SECTOR_SIZE) % object_size;
+block/sheepdog.c:    acb->nr_pending++;
+block/sheepdog.c:        switch (acb->aiocb_type) {
+block/sheepdog.c:                qemu_iovec_memset(acb->qiov, done, 0, len);
+block/sheepdog.c:                                acb->aiocb_type == AIOCB_DISCARD_OBJ ?
+block/sheepdog.c:        add_aio_request(s, aio_req, acb->qiov->iov, acb->qiov->niov,
+block/sheepdog.c:                        acb->aiocb_type);
+block/sheepdog.c:    if (--acb->nr_pending) {
+block/sheepdog.c:    if (acb->aiocb_type == AIOCB_FLUSH_CACHE) {
+block/sheepdog.c:    qemu_co_queue_restart_all(&acb->s->overlapping_queue);
+block/curl.c:        if ((s->buf_off >= acb->end)) {
+block/curl.c:            size_t request_length = acb->nb_sectors * BDRV_SECTOR_SIZE;
+block/curl.c:            qemu_iovec_from_buf(acb->qiov, 0, s->orig_buf + acb->start,
+block/curl.c:                                acb->end - acb->start);
+block/curl.c:            if (acb->end - acb->start < request_length) {
+block/curl.c:                size_t offset = acb->end - acb->start;
+block/curl.c:                qemu_iovec_memset(acb->qiov, offset, 0,
+block/curl.c:            acb->common.cb(acb->common.opaque, 0);
+block/curl.c:            qemu_iovec_from_buf(acb->qiov, 0, buf, clamped_len);
+block/curl.c:                qemu_iovec_memset(acb->qiov, clamped_len, 0, len - clamped_len);
+block/curl.c:            acb->common.cb(acb->common.opaque, 0);
+block/curl.c:            acb->start = start - state->buf_start;
+block/curl.c:            acb->end = acb->start + clamped_len;
+block/curl.c:                    acb->common.cb(acb->common.opaque, -EIO);
+block/curl.c:    BlockDriverState *bs = acb->common.bs;
+block/curl.c:    size_t start = acb->sector_num * BDRV_SECTOR_SIZE;
+block/curl.c:    switch (curl_find_buf(s, start, acb->nb_sectors * BDRV_SECTOR_SIZE, acb)) {
+block/curl.c:    state = curl_init_state(acb->common.bs, s);
+block/curl.c:    acb->start = 0;
+block/curl.c:    acb->end = MIN(acb->nb_sectors * BDRV_SECTOR_SIZE, s->len - start);
+block/curl.c:    state->buf_len = MIN(acb->end + s->readahead_size, s->len - start);
+block/curl.c:            (acb->nb_sectors * BDRV_SECTOR_SIZE), start, state->range);
+block/curl.c:        acb->common.cb(acb->common.opaque, ret);
+block/curl.c:    acb->qiov = qiov;
+block/curl.c:    acb->sector_num = sector_num;
+block/curl.c:    acb->nb_sectors = nb_sectors;
+block/curl.c:    return &acb->common;
+block/io.c:    while (acb->refcnt > 1) {
+block/io.c:        if (acb->aiocb_info->get_aio_context) {
+block/io.c:            aio_poll(acb->aiocb_info->get_aio_context(acb), true);
+block/io.c:        } else if (acb->bs) {
+block/io.c:            assert(bdrv_get_aio_context(acb->bs) == qemu_get_aio_context());
+block/io.c:            aio_poll(bdrv_get_aio_context(acb->bs), true);
+block/io.c:    if (acb->aiocb_info->cancel_async) {
+block/io.c:        acb->aiocb_info->cancel_async(acb);
+block/io.c:    if (!acb->need_bh) {
+block/io.c:        bdrv_dec_in_flight(acb->common.bs);
+block/io.c:        acb->common.cb(acb->common.opaque, acb->req.error);
+block/io.c:    assert(!acb->need_bh);
+block/io.c:    acb->need_bh = false;
+block/io.c:    if (acb->req.error != -EINPROGRESS) {
+block/io.c:        BlockDriverState *bs = acb->common.bs;
+block/io.c:    if (!acb->is_write) {
+block/io.c:        acb->req.error = bdrv_co_preadv(acb->child, acb->req.offset,
+block/io.c:            acb->req.qiov->size, acb->req.qiov, acb->req.flags);
+block/io.c:        acb->req.error = bdrv_co_pwritev(acb->child, acb->req.offset,
+block/io.c:            acb->req.qiov->size, acb->req.qiov, acb->req.flags);
+block/io.c:    acb->child = child;
+block/io.c:    acb->need_bh = true;
+block/io.c:    acb->req.error = -EINPROGRESS;
+block/io.c:    acb->req.offset = offset;
+block/io.c:    acb->req.qiov = qiov;
+block/io.c:    acb->req.flags = flags;
+block/io.c:    acb->is_write = is_write;
+block/io.c:    return &acb->common;
+block/io.c:    BlockDriverState *bs = acb->common.bs;
+block/io.c:    acb->req.error = bdrv_co_flush(bs);
+block/io.c:    acb->need_bh = true;
+block/io.c:    acb->req.error = -EINPROGRESS;
+block/io.c:    return &acb->common;
+block/gluster.c:    if (!ret || ret == acb->size) {
+block/gluster.c:        acb->ret = 0; /* Success */
+block/gluster.c:        acb->ret = -errno; /* Read/Write failed */
+block/gluster.c:        acb->ret = -EIO; /* Partial read/write - fail it */
+block/gluster.c:    aio_co_schedule(acb->aio_context, acb->coroutine);
+block/quorum.c:    g_free(acb->qcrs);
+block/quorum.c:    acb->qcrs = g_new0(QuorumChildRequest, s->num_children);
+block/quorum.c:        acb->qcrs[i].buf = NULL;
+block/quorum.c:        acb->qcrs[i].ret = 0;
+block/quorum.c:        acb->qcrs[i].parent = acb;
+block/quorum.c:    const char *reference = bdrv_get_device_or_node_name(acb->bs);
+block/quorum.c:    int64_t start_sector = acb->offset / BDRV_SECTOR_SIZE;
+block/quorum.c:    int64_t end_sector = DIV_ROUND_UP(acb->offset + acb->bytes,
+block/quorum.c:    BDRVQuorumState *s = acb->bs->opaque;
+block/quorum.c:    if (acb->success_count < s->threshold) {
+block/quorum.c:        acb->vote_ret = quorum_vote_error(acb);
+block/quorum.c:    QuorumAIOCB *acb = sacb->parent;
+block/quorum.c:    QuorumOpType type = acb->is_read ? QUORUM_OP_TYPE_READ : QUORUM_OP_TYPE_WRITE;
+block/quorum.c:    quorum_report_bad(type, acb->offset, acb->bytes, sacb->bs->node_name, ret);
+block/quorum.c:    QLIST_FOREACH(version, &acb->votes.vote_list, next) {
+block/quorum.c:        if (acb->votes.compare(&version->value, value)) {
+block/quorum.c:            quorum_report_bad(QUORUM_OP_TYPE_READ, acb->offset, acb->bytes,
+block/quorum.c:    BDRVQuorumState *s = acb->bs->opaque;
+block/quorum.c:    bdrv_co_pwritev(s->children[co->idx], acb->offset, acb->bytes,
+block/quorum.c:                    acb->qiov, 0);
+block/quorum.c:    acb->rewrite_count--;
+block/quorum.c:    if (!acb->rewrite_count) {
+block/quorum.c:        qemu_coroutine_enter_if_inactive(acb->co);
+block/quorum.c:    QLIST_FOREACH(version, &acb->votes.vote_list, next) {
+block/quorum.c:        if (acb->votes.compare(&version->value, value)) {
+block/quorum.c:    acb->rewrite_count = count;
+block/quorum.c:    QLIST_FOREACH(version, &acb->votes.vote_list, next) {
+block/quorum.c:        if (acb->votes.compare(&version->value, value)) {
+block/quorum.c:    QEMUIOVector *qiov = &acb->qcrs[i].qiov;
+block/quorum.c:            acb->offset, acb->bytes);
+block/quorum.c:    BDRVQuorumState *s = acb->bs->opaque;
+block/quorum.c:                       acb->offset + offset);
+block/quorum.c:    BDRVQuorumState *s = acb->bs->opaque;
+block/quorum.c:        ret = acb->qcrs[i].ret;
+block/quorum.c:    BDRVQuorumState *s = acb->bs->opaque;
+block/quorum.c:        if (!acb->qcrs[i].ret) {
+block/quorum.c:        if (acb->qcrs[j].ret) {
+block/quorum.c:        quorum = quorum_compare(acb, &acb->qcrs[i].qiov, &acb->qcrs[j].qiov);
+block/quorum.c:        quorum_copy_qiov(acb->qiov, &acb->qcrs[i].qiov);
+block/quorum.c:        if (acb->qcrs[i].ret) {
+block/quorum.c:            acb->vote_ret = ret;
+block/quorum.c:        quorum_count_vote(&acb->votes, &hash, i);
+block/quorum.c:    winner = quorum_get_vote_winner(&acb->votes);
+block/quorum.c:        acb->vote_ret = -EIO;
+block/quorum.c:    quorum_copy_qiov(acb->qiov, &acb->qcrs[winner->index].qiov);
+block/quorum.c:    quorum_free_vote_list(&acb->votes);
+block/quorum.c:    BDRVQuorumState *s = acb->bs->opaque;
+block/quorum.c:    QuorumChildRequest *sacb = &acb->qcrs[i];
+block/quorum.c:    sacb->bs = s->children[i]->bs;
+block/quorum.c:    sacb->ret = bdrv_co_preadv(s->children[i], acb->offset, acb->bytes,
+block/quorum.c:                               &acb->qcrs[i].qiov, 0);
+block/quorum.c:    if (sacb->ret == 0) {
+block/quorum.c:        acb->success_count++;
+block/quorum.c:        quorum_report_bad_acb(sacb, sacb->ret);
+block/quorum.c:    acb->count++;
+block/quorum.c:    assert(acb->count <= s->num_children);
+block/quorum.c:    assert(acb->success_count <= s->num_children);
+block/quorum.c:    if (acb->count == s->num_children) {
+block/quorum.c:        qemu_coroutine_enter_if_inactive(acb->co);
+block/quorum.c:    BDRVQuorumState *s = acb->bs->opaque;
+block/quorum.c:    acb->children_read = s->num_children;
+block/quorum.c:        acb->qcrs[i].buf = qemu_blockalign(s->children[i]->bs, acb->qiov->size);
+block/quorum.c:        qemu_iovec_init(&acb->qcrs[i].qiov, acb->qiov->niov);
+block/quorum.c:        qemu_iovec_clone(&acb->qcrs[i].qiov, acb->qiov, acb->qcrs[i].buf);
+block/quorum.c:    while (acb->count < s->num_children) {
+block/quorum.c:        qemu_vfree(acb->qcrs[i].buf);
+block/quorum.c:        qemu_iovec_destroy(&acb->qcrs[i].qiov);
+block/quorum.c:    while (acb->rewrite_count) {
+block/quorum.c:    ret = acb->vote_ret;
+block/quorum.c:    BDRVQuorumState *s = acb->bs->opaque;
+block/quorum.c:        n = acb->children_read++;
+block/quorum.c:        acb->qcrs[n].bs = s->children[n]->bs;
+block/quorum.c:        ret = bdrv_co_preadv(s->children[n], acb->offset, acb->bytes,
+block/quorum.c:                             acb->qiov, 0);
+block/quorum.c:            quorum_report_bad_acb(&acb->qcrs[n], ret);
+block/quorum.c:    } while (ret < 0 && acb->children_read < s->num_children);
+block/quorum.c:    /* FIXME: rewrite failed children if acb->children_read > 1? */
+block/quorum.c:    acb->is_read = true;
+block/quorum.c:    acb->children_read = 0;
+block/quorum.c:    BDRVQuorumState *s = acb->bs->opaque;
+block/quorum.c:    QuorumChildRequest *sacb = &acb->qcrs[i];
+block/quorum.c:    sacb->bs = s->children[i]->bs;
+block/quorum.c:    sacb->ret = bdrv_co_pwritev(s->children[i], acb->offset, acb->bytes,
+block/quorum.c:                                acb->qiov, 0);
+block/quorum.c:    if (sacb->ret == 0) {
+block/quorum.c:        acb->success_count++;
+block/quorum.c:        quorum_report_bad_acb(sacb, sacb->ret);
+block/quorum.c:    acb->count++;
+block/quorum.c:    assert(acb->count <= s->num_children);
+block/quorum.c:    assert(acb->success_count <= s->num_children);
+block/quorum.c:    if (acb->count == s->num_children) {
+block/quorum.c:        qemu_coroutine_enter_if_inactive(acb->co);
+block/quorum.c:    while (acb->count < s->num_children) {
+block/quorum.c:    ret = acb->vote_ret;
+block/null.c:    acb->common.cb(acb->common.opaque, 0);
+block/null.c:    acb->common.cb(acb->common.opaque, 0);
+block/null.c:    timer_deinit(&acb->timer);
+block/null.c:        aio_timer_init(bdrv_get_aio_context(bs), &acb->timer,
+block/null.c:        timer_mod_ns(&acb->timer,
+block/null.c:    return &acb->common;
+block/rbd.c:        iov_memset(acb->qiov->iov, acb->qiov->niov, offs, 0,
+block/rbd.c:                   acb->qiov->size - offs);
+block/rbd.c:    if (acb->cmd != RBD_AIO_READ) {
+block/rbd.c:            acb->ret = r;
+block/rbd.c:            acb->error = 1;
+block/rbd.c:        } else if (!acb->error) {
+block/rbd.c:            acb->ret = rcb->size;
+block/rbd.c:            acb->ret = r;
+block/rbd.c:            acb->error = 1;
+block/rbd.c:            if (!acb->error) {
+block/rbd.c:                acb->ret = rcb->size;
+block/rbd.c:        } else if (!acb->error) {
+block/rbd.c:            acb->ret = r;
+block/rbd.c:        if (acb->cmd == RBD_AIO_READ) {
+block/rbd.c:            qemu_iovec_from_buf(acb->qiov, 0, acb->bounce, acb->qiov->size);
+block/rbd.c:        qemu_vfree(acb->bounce);
+block/rbd.c:    acb->common.cb(acb->common.opaque, (acb->ret > 0 ? 0 : acb->ret));
+block/rbd.c:    aio_bh_schedule_oneshot(bdrv_get_aio_context(acb->common.bs),
+block/rbd.c:    acb->cmd = cmd;
+block/rbd.c:    acb->qiov = qiov;
+block/rbd.c:            acb->bounce = NULL;
+block/rbd.c:            acb->bounce = qemu_try_blockalign(bs, qiov->size);
+block/rbd.c:            if (acb->bounce == NULL) {
+block/rbd.c:            qemu_iovec_to_buf(acb->qiov, 0, acb->bounce, qiov->size);
+block/rbd.c:        rcb->buf = acb->bounce;
+block/rbd.c:    acb->ret = 0;
+block/rbd.c:    acb->error = 0;
+block/rbd.c:    acb->s = s;
+block/rbd.c:    rcb->s = acb->s;
+block/rbd.c:    return &acb->common;
+block/rbd.c:        qemu_vfree(acb->bounce);
+block/file-posix.c:    acb->bs = bs;
+block/file-posix.c:    acb->aio_type = type;
+block/file-posix.c:    acb->aio_fildes = fd;
+block/file-posix.c:    acb->aio_nbytes = count;
+block/file-posix.c:    acb->aio_offset = offset;
+block/file-posix.c:        acb->aio_iov = qiov->iov;
+block/file-posix.c:        acb->aio_niov = qiov->niov;
+block/file-posix.c:    acb->bs = bs;
+block/file-posix.c:    acb->aio_type = type;
+block/file-posix.c:    acb->aio_fildes = fd;
+block/file-posix.c:    acb->aio_nbytes = count;
+block/file-posix.c:    acb->aio_offset = offset;
+block/file-posix.c:        acb->aio_iov = qiov->iov;
+block/file-posix.c:        acb->aio_niov = qiov->niov;
+block/file-posix.c:        assert(qiov->size == acb->aio_nbytes);
+block/file-posix.c:    acb->bs = bs;
+block/file-posix.c:    acb->aio_type = QEMU_AIO_IOCTL;
+block/file-posix.c:    acb->aio_fildes = s->fd;
+block/file-posix.c:    acb->aio_offset = 0;
+block/file-posix.c:    acb->aio_ioctl_buf = buf;
+block/file-posix.c:    acb->aio_ioctl_cmd = req;
+block/file-win32.c:    acb->bs = bs;
+block/file-win32.c:    acb->hfile = hfile;
+block/file-win32.c:    acb->aio_type = type;
+block/file-win32.c:        acb->aio_iov = qiov->iov;
+block/file-win32.c:        acb->aio_niov = qiov->niov;
+block/file-win32.c:    acb->aio_nbytes = count;
+block/file-win32.c:    acb->aio_offset = offset;
+block/iscsi.c:    qemu_bh_delete(acb->bh);
+block/iscsi.c:    g_free(acb->buf);
+block/iscsi.c:    acb->buf = NULL;
+block/iscsi.c:    acb->common.cb(acb->common.opaque, acb->status);
+block/iscsi.c:    if (acb->task != NULL) {
+block/iscsi.c:        scsi_free_scsi_task(acb->task);
+block/iscsi.c:        acb->task = NULL;
+block/iscsi.c:    if (acb->bh) {
+block/iscsi.c:    acb->bh = aio_bh_new(acb->iscsilun->aio_context, iscsi_bh_cb, acb);
+block/iscsi.c:    qemu_bh_schedule(acb->bh);
+block/iscsi.c:    acb->status = -ECANCELED;
+block/iscsi.c:    IscsiLun *iscsilun = acb->iscsilun;
+block/iscsi.c:    if (acb->status != -EINPROGRESS) {
+block/iscsi.c:    iscsi_task_mgmt_abort_task_async(iscsilun->iscsi, acb->task,
+block/iscsi.c:    g_free(acb->buf);
+block/iscsi.c:    acb->buf = NULL;
+block/iscsi.c:    acb->status = 0;
+block/iscsi.c:        acb->status = iscsi_translate_sense(&acb->task->sense);
+block/iscsi.c:    acb->ioh->driver_status = 0;
+block/iscsi.c:    acb->ioh->host_status   = 0;
+block/iscsi.c:    acb->ioh->resid         = 0;
+block/iscsi.c:    acb->ioh->status        = status;
+block/iscsi.c:    if (status == SCSI_STATUS_CHECK_CONDITION && acb->task->datain.size >= 2) {
+block/iscsi.c:        acb->ioh->driver_status |= SG_ERR_DRIVER_SENSE;
+block/iscsi.c:        acb->ioh->sb_len_wr = acb->task->datain.size - 2;
+block/iscsi.c:        ss = (acb->ioh->mx_sb_len >= acb->ioh->sb_len_wr) ?
+block/iscsi.c:             acb->ioh->mx_sb_len : acb->ioh->sb_len_wr;
+block/iscsi.c:        memcpy(acb->ioh->sbp, &acb->task->datain.data[2], ss);
+block/iscsi.c:    qemu_bh_delete(acb->bh);
+block/iscsi.c:    acb->common.cb(acb->common.opaque, acb->ret);
+block/iscsi.c:    BlockDriverState *bs = acb->common.bs;
+block/iscsi.c:    assert(!acb->bh);
+block/iscsi.c:    acb->bh = aio_bh_new(bdrv_get_aio_context(bs),
+block/iscsi.c:    acb->ret = ret;
+block/iscsi.c:    qemu_bh_schedule(acb->bh);
+block/iscsi.c:    acb->iscsilun = iscsilun;
+block/iscsi.c:    acb->bh          = NULL;
+block/iscsi.c:    acb->status      = -EINPROGRESS;
+block/iscsi.c:    acb->buf         = NULL;
+block/iscsi.c:    acb->ioh         = buf;
+block/iscsi.c:        return &acb->common;
+block/iscsi.c:    if (acb->ioh->cmd_len > SCSI_CDB_MAX_SIZE) {
+block/iscsi.c:                     acb->ioh->cmd_len, SCSI_CDB_MAX_SIZE);
+block/iscsi.c:    acb->task = malloc(sizeof(struct scsi_task));
+block/iscsi.c:    if (acb->task == NULL) {
+block/iscsi.c:    memset(acb->task, 0, sizeof(struct scsi_task));
+block/iscsi.c:    switch (acb->ioh->dxfer_direction) {
+block/iscsi.c:        acb->task->xfer_dir = SCSI_XFER_WRITE;
+block/iscsi.c:        acb->task->xfer_dir = SCSI_XFER_READ;
+block/iscsi.c:        acb->task->xfer_dir = SCSI_XFER_NONE;
+block/iscsi.c:    acb->task->cdb_size = acb->ioh->cmd_len;
+block/iscsi.c:    memcpy(&acb->task->cdb[0], acb->ioh->cmdp, acb->ioh->cmd_len);
+block/iscsi.c:    acb->task->expxferlen = acb->ioh->dxfer_len;
+block/iscsi.c:    if (acb->task->xfer_dir == SCSI_XFER_WRITE) {
+block/iscsi.c:        if (acb->ioh->iovec_count == 0) {
+block/iscsi.c:            data.data = acb->ioh->dxferp;
+block/iscsi.c:            data.size = acb->ioh->dxfer_len;
+block/iscsi.c:            scsi_task_set_iov_out(acb->task,
+block/iscsi.c:                                 (struct scsi_iovec *) acb->ioh->dxferp,
+block/iscsi.c:                                 acb->ioh->iovec_count);
+block/iscsi.c:    if (iscsi_scsi_command_async(iscsi, iscsilun->lun, acb->task,
+block/iscsi.c:        scsi_free_scsi_task(acb->task);
+block/iscsi.c:    if (acb->task->xfer_dir == SCSI_XFER_READ) {
+block/iscsi.c:        if (acb->ioh->iovec_count == 0) {
+block/iscsi.c:            scsi_task_add_data_in_buffer(acb->task,
+block/iscsi.c:                                         acb->ioh->dxfer_len,
+block/iscsi.c:                                         acb->ioh->dxferp);
+block/iscsi.c:            scsi_task_set_iov_in(acb->task,
+block/iscsi.c:                                 (struct scsi_iovec *) acb->ioh->dxferp,
+block/iscsi.c:                                 acb->ioh->iovec_count);
+block/iscsi.c:    return &acb->common;
+block/block-backend.c:    bdrv_dec_in_flight(acb->common.bs);
+block/block-backend.c:    acb->common.cb(acb->common.opaque, acb->ret);
+block/block-backend.c:    acb->blk = blk;
+block/block-backend.c:    acb->ret = ret;
+block/block-backend.c:    return &acb->common;
+block/block-backend.c:    if (acb->has_returned) {
+block/block-backend.c:        bdrv_dec_in_flight(acb->common.bs);
+block/block-backend.c:        acb->common.cb(acb->common.opaque, acb->rwco.ret);
+block/block-backend.c:    assert(acb->has_returned);
+block/block-backend.c:    acb->rwco = (BlkRwCo) {
+block/block-backend.c:    acb->bytes = bytes;
+block/block-backend.c:    acb->has_returned = false;
+block/block-backend.c:    acb->has_returned = true;
+block/block-backend.c:    if (acb->rwco.ret != NOT_DONE) {
+block/block-backend.c:    return &acb->common;
+block/block-backend.c:    BlkRwCo *rwco = &acb->rwco;
+block/block-backend.c:    assert(rwco->qiov->size == acb->bytes);
+block/block-backend.c:    rwco->ret = blk_co_preadv(rwco->blk, rwco->offset, acb->bytes,
+block/block-backend.c:    BlkRwCo *rwco = &acb->rwco;
+block/block-backend.c:    assert(!rwco->qiov || rwco->qiov->size == acb->bytes);
+block/block-backend.c:    rwco->ret = blk_co_pwritev(rwco->blk, rwco->offset, acb->bytes,
+block/block-backend.c:    BlkRwCo *rwco = &acb->rwco;
+block/block-backend.c:    BlkRwCo *rwco = &acb->rwco;
+block/block-backend.c:    rwco->ret = blk_co_pdiscard(rwco->blk, rwco->offset, acb->bytes);
+block/block-backend.c:    BlkRwCo *rwco = &acb->rwco;
+block/block-backend.c:    return blk_get_aio_context(blk_acb->blk);
+Binary file build-femu/libqemuutil.a matches
+Binary file build-femu/qemu-nbd matches
+Binary file build-femu/qemu-ga matches
+Binary file build-femu/qemu-img matches
+Binary file build-femu/qemu-io matches
+Binary file build-femu/x86_64-softmmu/qemu-system-x86_64 matches
+Binary file build-femu/block/block-backend.o matches
+Binary file build-femu/block/qed.o matches
+Binary file build-femu/block/iscsi.o matches
+Binary file build-femu/block/io.o matches
+Binary file build-femu/block/quorum.o matches
+Binary file build-femu/util/aiocb.o matches
+cscope.out:(&acb->
+Binary file cscope.out matches
+tests/fw_cfg-test.c:    cmdline = g_strdup_printf("-uuid 4600cb32-38ec-4b2f-8acb-81c6ea54f2d8 ");
+util/aiocb.c:    acb->aiocb_info = aiocb_info;
+util/aiocb.c:    acb->bs = bs;
+util/aiocb.c:    acb->cb = cb;
+util/aiocb.c:    acb->opaque = opaque;
+util/aiocb.c:    acb->refcnt = 1;
+util/aiocb.c:    acb->refcnt++;
+util/aiocb.c:    assert(acb->refcnt > 0);
+util/aiocb.c:    if (--acb->refcnt == 0) {

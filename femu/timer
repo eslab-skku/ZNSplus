@@ -1,0 +1,1254 @@
+Binary file build-femu/hw/block/nvme.o matches
+Binary file build-femu/x86_64-softmmu/qemu-system-x86_64 matches
+Binary file cscope.out matches
+hw/s390x/sclpquiesce.c:    sq->ebh.length = cpu_to_be16(sizeof(SignalQuiesce));
+hw/s390x/sclpquiesce.c:    sq->ebh.type = SCLP_EVENT_SIGNAL_QUIESCE;
+hw/s390x/sclpquiesce.c:    sq->ebh.flags |= SCLP_EVENT_BUFFER_ACCEPTED;
+hw/s390x/sclpquiesce.c:    sq->timeout = cpu_to_be16(0);
+hw/s390x/sclpquiesce.c:    sq->unit = cpu_to_be16(0);
+hw/block/tmp2/nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/tmp2/nvme.c:	QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/tmp2/nvme.c:	QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/tmp2/nvme.c:		sq->head_bitmap[req->cmd_idx] = 3;
+hw/block/tmp2/nvme.c:	if (req->cmd_idx == sq->head) nvme_update_sq_head(sq);
+hw/block/tmp2/nvme.c:    sq->head = (sq->head + 1) % sq->size;
+hw/block/tmp2/nvme.c:// SOMM: Update the sq->head by referring to the sq->head_bitmap.
+hw/block/tmp2/nvme.c:	int idx = sq->head % sq->size;
+hw/block/tmp2/nvme.c:	while (idx != sq->tail) {
+hw/block/tmp2/nvme.c:		if (sq->head_bitmap[idx] != 3)
+hw/block/tmp2/nvme.c:		sq->head_bitmap[idx] = 0;
+hw/block/tmp2/nvme.c:		idx = (idx + 1) % sq->size;
+hw/block/tmp2/nvme.c:	sq->head = idx;
+hw/block/tmp2/nvme.c:    return sq->head == sq->tail;
+hw/block/tmp2/nvme.c:    cqe->sq_id = cpu_to_le16(sq->sqid);
+hw/block/tmp2/nvme.c:    cqe->sq_head = cpu_to_le16(sq->head);
+hw/block/tmp2/nvme.c:    QTAILQ_INSERT_TAIL(&sq->req_list, req, entry);
+hw/block/tmp2/nvme.c:	assert(cq->cqid == req->sq->cqid);
+hw/block/tmp2/nvme.c:	QTAILQ_REMOVE(&req->sq->out_req_list, req, entry);
+hw/block/tmp2/nvme.c:    assert(cq->cqid == req->sq->cqid);
+hw/block/tmp2/nvme.c:    QTAILQ_REMOVE(&req->sq->out_req_list, req, entry);
+hw/block/tmp2/nvme.c:    assert(cq->cqid == req->sq->cqid);
+hw/block/tmp2/nvme.c:    QTAILQ_REMOVE(&req->sq->out_req_list, req, entry);
+hw/block/tmp2/nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/tmp2/nvme.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/tmp2/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/tmp2/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tmp2/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tmp2/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tmp2/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_UNRECOVERED_READ,
+hw/block/tmp2/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tmp2/nvme.c:            nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tmp2/nvme.c:                nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/tmp2/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/tmp2/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tmp2/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tmp2/nvme.c:            nvme_set_error_page(n, req->sq->sqid, req->cqe.cid,
+hw/block/tmp2/nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/tmp2/nvme.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/tmp2/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/tmp2/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/tmp2/nvme.c:    n->sq[sq->sqid] = NULL;
+hw/block/tmp2/nvme.c:    timer_del(sq->timer);
+hw/block/tmp2/nvme.c:    timer_free(sq->timer);
+hw/block/tmp2/nvme.c:    g_free(sq->io_req);
+hw/block/tmp2/nvme.c:    if (sq->prp_list) {
+hw/block/tmp2/nvme.c:        g_free(sq->prp_list);
+hw/block/tmp2/nvme.c:    if (sq->sqid) {
+hw/block/tmp2/nvme.c:    QTAILQ_FOREACH_SAFE(req, &sq->out_req_list, entry, next) {
+hw/block/tmp2/nvme.c:    if (!nvme_check_cqid(n, sq->cqid)) {
+hw/block/tmp2/nvme.c:        cq = n->cq[sq->cqid];
+hw/block/tmp2/nvme.c:                QTAILQ_INSERT_TAIL(&sq->req_list, req, entry);
+hw/block/tmp2/nvme.c:    sq->ctrl = n;
+hw/block/tmp2/nvme.c:    sq->sqid = sqid;
+hw/block/tmp2/nvme.c:    sq->size = size;
+hw/block/tmp2/nvme.c:    sq->cqid = cqid;
+hw/block/tmp2/nvme.c:    sq->head = sq->tail = 0;
+hw/block/tmp2/nvme.c:    sq->phys_contig = contig;
+hw/block/tmp2/nvme.c:    if (sq->phys_contig) {
+hw/block/tmp2/nvme.c:        sq->dma_addr = dma_addr;
+hw/block/tmp2/nvme.c:        sq->prp_list = nvme_setup_discontig(n, dma_addr, size, n->sqe_size);
+hw/block/tmp2/nvme.c:        if (!sq->prp_list) {
+hw/block/tmp2/nvme.c:	sq->last_sq_index = 0;
+hw/block/tmp2/nvme.c:    sq->io_req = g_malloc0(sq->size * sizeof(*sq->io_req));
+hw/block/tmp2/nvme.c:	sq->io_cmd = g_malloc0(sq->size * sizeof(*sq->io_cmd));
+hw/block/tmp2/nvme.c:	sq->head_bitmap = g_malloc0(sq->size * sizeof(*sq->head_bitmap));
+hw/block/tmp2/nvme.c:    QTAILQ_INIT(&sq->req_list);
+hw/block/tmp2/nvme.c:    QTAILQ_INIT(&sq->out_req_list);
+hw/block/tmp2/nvme.c:	QTAILQ_INIT(&sq->cmd_list);
+hw/block/tmp2/nvme.c:    for (i = 0; i < sq->size; i++) {
+hw/block/tmp2/nvme.c:        sq->io_req[i].sq = sq;
+hw/block/tmp2/nvme.c:	sq->io_req[i].cmd_idx = i;
+hw/block/tmp2/nvme.c:        QTAILQ_INSERT_TAIL(&(sq->req_list), &sq->io_req[i], entry);
+hw/block/tmp2/nvme.c:		sq->io_cmd[i].num = i;
+hw/block/tmp2/nvme.c:		sq->head_bitmap[i] = 0;
+hw/block/tmp2/nvme.c:        sq->arb_burst = (1 << NVME_ARB_AB(n->features.arbitration));
+hw/block/tmp2/nvme.c:        sq->arb_burst = NVME_ARB_HPW(n->features.arbitration) + 1;
+hw/block/tmp2/nvme.c:        sq->arb_burst = NVME_ARB_MPW(n->features.arbitration) + 1;
+hw/block/tmp2/nvme.c:        sq->arb_burst = NVME_ARB_LPW(n->features.arbitration) + 1;
+hw/block/tmp2/nvme.c:        sq->timer = timer_new_ns(QEMU_CLOCK_REALTIME, nvme_process_sq_admin, sq);
+hw/block/tmp2/nvme.c:        sq->timer = timer_new_ns(QEMU_CLOCK_REALTIME, nvme_process_sq_io, sq);
+hw/block/tmp2/nvme.c:		sq->db_addr = n->dbs_addr + 2 * sqid * dbbuf_entry_sz;
+hw/block/tmp2/nvme.c:		sq->eventidx_addr = n->eis_addr + 2 * sqid * dbbuf_entry_sz;
+hw/block/tmp2/nvme.c:		printf("Coperd, SQ, db_addr=%" PRIu64 ", eventidx_addr=%" PRIu64 "\n", sq->db_addr, sq->eventidx_addr);
+hw/block/tmp2/nvme.c:        timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + 1000000);
+hw/block/tmp2/nvme.c:    QTAILQ_FOREACH_SAFE(req, &sq->out_req_list, entry, next) {
+hw/block/tmp2/nvme.c:        if (sq->sqid) {
+hw/block/tmp2/nvme.c:    while ((sq->head + index) % sq->size != sq->tail) {
+hw/block/tmp2/nvme.c:        if (sq->phys_contig) {
+hw/block/tmp2/nvme.c:            addr = sq->dma_addr + ((sq->head + index) % sq->size) *
+hw/block/tmp2/nvme.c:            addr = nvme_discontig(sq->prp_list, (sq->head + index) % sq->size,
+hw/block/tmp2/nvme.c:            req = QTAILQ_FIRST(&sq->req_list);
+hw/block/tmp2/nvme.c:            QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/tmp2/nvme.c:            QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/tmp2/nvme.c:            nvme_enqueue_req_completion(n->cq[sq->cqid], req);
+hw/block/tmp2/nvme.c:            sq->db_addr = dbs_addr + 2 * i * dbbuf_entry_sz;
+hw/block/tmp2/nvme.c:            sq->eventidx_addr = eis_addr + 2 * i * dbbuf_entry_sz;
+hw/block/tmp2/nvme.c:                    i, sq->db_addr, sq->eventidx_addr);
+hw/block/tmp2/nvme.c:    if (sq->eventidx_addr) {
+hw/block/tmp2/nvme.c:        nvme_addr_write(sq->ctrl, sq->eventidx_addr, (void *)&sq->tail,
+hw/block/tmp2/nvme.c:            sizeof(sq->tail));
+hw/block/tmp2/nvme.c:    if (sq->db_addr) {
+hw/block/tmp2/nvme.c:        nvme_addr_read(sq->ctrl, sq->db_addr, &sq->tail, sizeof(sq->tail));
+hw/block/tmp2/nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/tmp2/nvme.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/tmp2/nvme.c:    while (!(nvme_sq_empty(sq) || QTAILQ_EMPTY(&sq->req_list)) &&
+hw/block/tmp2/nvme.c:            processed++ < sq->arb_burst) {
+hw/block/tmp2/nvme.c:        if (sq->phys_contig) {
+hw/block/tmp2/nvme.c:            addr = sq->dma_addr + sq->head * n->sqe_size;
+hw/block/tmp2/nvme.c:            addr = nvme_discontig(sq->prp_list, sq->head, n->page_size,
+hw/block/tmp2/nvme.c:        req = QTAILQ_FIRST(&sq->req_list);
+hw/block/tmp2/nvme.c:        QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/tmp2/nvme.c:        QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/tmp2/nvme.c:        assert(cq->cqid == req->sq->cqid && sq->sqid == 0);
+hw/block/tmp2/nvme.c:     * newly submitted I/Os during next sq->timer triggering
+hw/block/tmp2/nvme.c:    sq->completed += processed;
+hw/block/tmp2/nvme.c:	NvmeCtrl *n = sq->ctrl;
+hw/block/tmp2/nvme.c:	NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/tmp2/nvme.c:	if (!(nvme_sq_empty(sq) || QTAILQ_EMPTY(&sq->req_list)) && processed++ < sq->arb_burst) {
+hw/block/tmp2/nvme.c:		for(cmd_off_iter = sq->head; cmd_off_iter != sq->tail; cmd_off_iter = (cmd_off_iter + 1) % sq->size) {
+hw/block/tmp2/nvme.c:			req = &sq->io_req[cmd_off_iter];
+hw/block/tmp2/nvme.c:			if (sq->phys_contig)
+hw/block/tmp2/nvme.c:				addr = sq->dma_addr + req_idx * n->sqe_size;
+hw/block/tmp2/nvme.c:				addr = nvme_discontig(sq->prp_list, req_idx, n->page_size, n->sqe_size);
+hw/block/tmp2/nvme.c:			if(sq->head_bitmap[req->cmd_idx] == 0) {
+hw/block/tmp2/nvme.c:				sq->head_bitmap[req->cmd_idx] = 1;
+hw/block/tmp2/nvme.c:		for(cmd_off_iter = sq->head; cmd_off_iter != sq->tail; cmd_off_iter = (cmd_off_iter + 1) % sq->size) {
+hw/block/tmp2/nvme.c:			req = &sq->io_req[cmd_off_iter];
+hw/block/tmp2/nvme.c:			if (sq->head_bitmap[req->cmd_idx] == 0 || sq->head_bitmap[req->cmd_idx] == 3) {
+hw/block/tmp2/nvme.c:				if(sq->head_bitmap[req->cmd_idx] == 1) {
+hw/block/tmp2/nvme.c:						sq->head_bitmap[req->cmd_idx] = 2;
+hw/block/tmp2/nvme.c:						sq->head_bitmap[req->cmd_idx] = 2;
+hw/block/tmp2/nvme.c:	 * newly submitted I/Os during next sq->timer triggering
+hw/block/tmp2/nvme.c:	sq->completed += processed;
+hw/block/tmp2/nvme.c:	timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + SQ_POLLING_PERIOD_NS);
+hw/block/tmp2/nvme.c:                if (!timer_pending(sq->timer)) {
+hw/block/tmp2/nvme.c:                    if (sq->sqid == 0)
+hw/block/tmp2/nvme.c:                        timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + 500);
+hw/block/tmp2/nvme.c:        if (new_val >= sq->size) {
+hw/block/tmp2/nvme.c:        if (!sq->db_addr) {
+hw/block/tmp2/nvme.c:            sq->tail = new_val;
+hw/block/tmp2/nvme.c:        if (!timer_pending(sq->timer)) {
+hw/block/tmp2/nvme.c:            if (sq->sqid == 0)
+hw/block/tmp2/nvme.c:                timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + 500);
+hw/block/tmp/tmp_nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/tmp/tmp_nvme.c:	QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/tmp/tmp_nvme.c:	QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/tmp/tmp_nvme.c:		sq->head_bitmap[req->cmd_idx] = 3;
+hw/block/tmp/tmp_nvme.c:	if (req->cmd_idx == sq->head) nvme_update_sq_head(sq);
+hw/block/tmp/tmp_nvme.c:    sq->head = (sq->head + 1) % sq->size;
+hw/block/tmp/tmp_nvme.c:// SOMM: Update the sq->head by referring to the sq->head_bitmap.
+hw/block/tmp/tmp_nvme.c:	int idx = sq->head % sq->size;
+hw/block/tmp/tmp_nvme.c:	while (idx != sq->tail) {
+hw/block/tmp/tmp_nvme.c:		if (sq->head_bitmap[idx] != 3)
+hw/block/tmp/tmp_nvme.c:		sq->head_bitmap[idx] = 0;
+hw/block/tmp/tmp_nvme.c:		idx = (idx + 1) % sq->size;
+hw/block/tmp/tmp_nvme.c://	printf("nvme_update_sq_head: sq->head %d new head %d\n", sq->head, idx);
+hw/block/tmp/tmp_nvme.c:	sq->head = idx;
+hw/block/tmp/tmp_nvme.c:    return sq->head == sq->tail;
+hw/block/tmp/tmp_nvme.c:    cqe->sq_id = cpu_to_le16(sq->sqid);
+hw/block/tmp/tmp_nvme.c:    cqe->sq_head = cpu_to_le16(sq->head);
+hw/block/tmp/tmp_nvme.c:    QTAILQ_INSERT_TAIL(&sq->req_list, req, entry);
+hw/block/tmp/tmp_nvme.c:	assert(cq->cqid == req->sq->cqid);
+hw/block/tmp/tmp_nvme.c:	QTAILQ_REMOVE(&req->sq->out_req_list, req, entry);
+hw/block/tmp/tmp_nvme.c:    assert(cq->cqid == req->sq->cqid);
+hw/block/tmp/tmp_nvme.c:    QTAILQ_REMOVE(&req->sq->out_req_list, req, entry);
+hw/block/tmp/tmp_nvme.c:    assert(cq->cqid == req->sq->cqid);
+hw/block/tmp/tmp_nvme.c:    QTAILQ_REMOVE(&req->sq->out_req_list, req, entry);
+hw/block/tmp/tmp_nvme.c:    assert(cq->cqid == req->sq->cqid);
+hw/block/tmp/tmp_nvme.c:    QTAILQ_REMOVE(&req->sq->out_req_list, req, entry);
+hw/block/tmp/tmp_nvme.c:    notify = coalesce_disabled || !req->sq->sqid || !time_ns ||
+hw/block/tmp/tmp_nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/tmp/tmp_nvme.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/tmp/tmp_nvme.c:        nvme_set_error_page(n, sq->sqid, req->cqe.cid, req->status,
+hw/block/tmp/tmp_nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/tmp/tmp_nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tmp/tmp_nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tmp/tmp_nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tmp/tmp_nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_UNRECOVERED_READ,
+hw/block/tmp/tmp_nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tmp/tmp_nvme.c:            nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tmp/tmp_nvme.c:                nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/tmp/tmp_nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/tmp/tmp_nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tmp/tmp_nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tmp/tmp_nvme.c:            nvme_set_error_page(n, req->sq->sqid, req->cqe.cid,
+hw/block/tmp/tmp_nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/tmp/tmp_nvme.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/tmp/tmp_nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/tmp/tmp_nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/tmp/tmp_nvme.c:    n->sq[sq->sqid] = NULL;
+hw/block/tmp/tmp_nvme.c:    timer_del(sq->timer);
+hw/block/tmp/tmp_nvme.c:    timer_free(sq->timer);
+hw/block/tmp/tmp_nvme.c:    g_free(sq->io_req);
+hw/block/tmp/tmp_nvme.c:    if (sq->prp_list) {
+hw/block/tmp/tmp_nvme.c:        g_free(sq->prp_list);
+hw/block/tmp/tmp_nvme.c:    if (sq->sqid) {
+hw/block/tmp/tmp_nvme.c:    QTAILQ_FOREACH_SAFE(req, &sq->out_req_list, entry, next) {
+hw/block/tmp/tmp_nvme.c:    if (!nvme_check_cqid(n, sq->cqid)) {
+hw/block/tmp/tmp_nvme.c:        cq = n->cq[sq->cqid];
+hw/block/tmp/tmp_nvme.c:                QTAILQ_INSERT_TAIL(&sq->req_list, req, entry);
+hw/block/tmp/tmp_nvme.c:    sq->ctrl = n;
+hw/block/tmp/tmp_nvme.c:    sq->sqid = sqid;
+hw/block/tmp/tmp_nvme.c:    sq->size = size;
+hw/block/tmp/tmp_nvme.c:    sq->cqid = cqid;
+hw/block/tmp/tmp_nvme.c:    sq->head = sq->tail = 0;
+hw/block/tmp/tmp_nvme.c:    sq->phys_contig = contig;
+hw/block/tmp/tmp_nvme.c:    if (sq->phys_contig) {
+hw/block/tmp/tmp_nvme.c:        sq->dma_addr = dma_addr;
+hw/block/tmp/tmp_nvme.c:        sq->prp_list = nvme_setup_discontig(n, dma_addr, size, n->sqe_size);
+hw/block/tmp/tmp_nvme.c:        if (!sq->prp_list) {
+hw/block/tmp/tmp_nvme.c:	sq->last_sq_index = 0;
+hw/block/tmp/tmp_nvme.c:    sq->io_req = g_malloc0(sq->size * sizeof(*sq->io_req));
+hw/block/tmp/tmp_nvme.c:	sq->io_cmd = g_malloc0(sq->size * sizeof(*sq->io_cmd));
+hw/block/tmp/tmp_nvme.c:	sq->head_bitmap = g_malloc0(sq->size * sizeof(*sq->head_bitmap));
+hw/block/tmp/tmp_nvme.c:    QTAILQ_INIT(&sq->req_list);
+hw/block/tmp/tmp_nvme.c:    QTAILQ_INIT(&sq->out_req_list);
+hw/block/tmp/tmp_nvme.c:	QTAILQ_INIT(&sq->cmd_list);
+hw/block/tmp/tmp_nvme.c:    for (i = 0; i < sq->size; i++) {
+hw/block/tmp/tmp_nvme.c:        sq->io_req[i].sq = sq;
+hw/block/tmp/tmp_nvme.c:	sq->io_req[i].cmd_idx = i;
+hw/block/tmp/tmp_nvme.c:        QTAILQ_INSERT_TAIL(&(sq->req_list), &sq->io_req[i], entry);
+hw/block/tmp/tmp_nvme.c:		sq->io_cmd[i].num = i;
+hw/block/tmp/tmp_nvme.c:		sq->head_bitmap[i] = 0;
+hw/block/tmp/tmp_nvme.c:        sq->arb_burst = (1 << NVME_ARB_AB(n->features.arbitration));
+hw/block/tmp/tmp_nvme.c:        sq->arb_burst = NVME_ARB_HPW(n->features.arbitration) + 1;
+hw/block/tmp/tmp_nvme.c:        sq->arb_burst = NVME_ARB_MPW(n->features.arbitration) + 1;
+hw/block/tmp/tmp_nvme.c:        sq->arb_burst = NVME_ARB_LPW(n->features.arbitration) + 1;
+hw/block/tmp/tmp_nvme.c:        sq->timer = timer_new_ns(QEMU_CLOCK_REALTIME, nvme_process_sq_admin, sq);
+hw/block/tmp/tmp_nvme.c:        sq->timer = timer_new_ns(QEMU_CLOCK_REALTIME, nvme_process_sq_io, sq);
+hw/block/tmp/tmp_nvme.c:		sq->db_addr = n->dbs_addr + 2 * sqid * dbbuf_entry_sz;
+hw/block/tmp/tmp_nvme.c:		sq->eventidx_addr = n->eis_addr + 2 * sqid * dbbuf_entry_sz;
+hw/block/tmp/tmp_nvme.c:		printf("Coperd, SQ, db_addr=%" PRIu64 ", eventidx_addr=%" PRIu64 "\n", sq->db_addr, sq->eventidx_addr);
+hw/block/tmp/tmp_nvme.c:        timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + 1000000);
+hw/block/tmp/tmp_nvme.c:    QTAILQ_FOREACH_SAFE(req, &sq->out_req_list, entry, next) {
+hw/block/tmp/tmp_nvme.c:        if (sq->sqid) {
+hw/block/tmp/tmp_nvme.c:    while ((sq->head + index) % sq->size != sq->tail) {
+hw/block/tmp/tmp_nvme.c:        if (sq->phys_contig) {
+hw/block/tmp/tmp_nvme.c:            addr = sq->dma_addr + ((sq->head + index) % sq->size) *
+hw/block/tmp/tmp_nvme.c:            addr = nvme_discontig(sq->prp_list, (sq->head + index) % sq->size,
+hw/block/tmp/tmp_nvme.c:            req = QTAILQ_FIRST(&sq->req_list);
+hw/block/tmp/tmp_nvme.c:            QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/tmp/tmp_nvme.c:            QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/tmp/tmp_nvme.c:            nvme_enqueue_req_completion(n->cq[sq->cqid], req);
+hw/block/tmp/tmp_nvme.c:            sq->db_addr = dbs_addr + 2 * i * dbbuf_entry_sz;
+hw/block/tmp/tmp_nvme.c:            sq->eventidx_addr = eis_addr + 2 * i * dbbuf_entry_sz;
+hw/block/tmp/tmp_nvme.c:                    i, sq->db_addr, sq->eventidx_addr);
+hw/block/tmp/tmp_nvme.c:    if (sq->eventidx_addr) {
+hw/block/tmp/tmp_nvme.c:        nvme_addr_write(sq->ctrl, sq->eventidx_addr, (void *)&sq->tail,
+hw/block/tmp/tmp_nvme.c:            sizeof(sq->tail));
+hw/block/tmp/tmp_nvme.c:    if (sq->db_addr) {
+hw/block/tmp/tmp_nvme.c:        nvme_addr_read(sq->ctrl, sq->db_addr, &sq->tail, sizeof(sq->tail));
+hw/block/tmp/tmp_nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/tmp/tmp_nvme.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/tmp/tmp_nvme.c:    while (!(nvme_sq_empty(sq) || QTAILQ_EMPTY(&sq->req_list)) &&
+hw/block/tmp/tmp_nvme.c:            processed++ < sq->arb_burst) {
+hw/block/tmp/tmp_nvme.c:        if (sq->phys_contig) {
+hw/block/tmp/tmp_nvme.c:            addr = sq->dma_addr + sq->head * n->sqe_size;
+hw/block/tmp/tmp_nvme.c:            addr = nvme_discontig(sq->prp_list, sq->head, n->page_size,
+hw/block/tmp/tmp_nvme.c:        req = QTAILQ_FIRST(&sq->req_list);
+hw/block/tmp/tmp_nvme.c:        QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/tmp/tmp_nvme.c:        QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/tmp/tmp_nvme.c:        assert(cq->cqid == req->sq->cqid && sq->sqid == 0);
+hw/block/tmp/tmp_nvme.c:     * newly submitted I/Os during next sq->timer triggering
+hw/block/tmp/tmp_nvme.c:    sq->completed += processed;
+hw/block/tmp/tmp_nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/tmp/tmp_nvme.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/tmp/tmp_nvme.c:/* 	if(sq->head > sq->tail && (1024 - sq->head + sq->tail) > MAX_MIXED_COUNT) {
+hw/block/tmp/tmp_nvme.c:		printf("MIXED - %u-%u\n", sq->head, sq->tail);
+hw/block/tmp/tmp_nvme.c:	else if(sq->head <= sq->tail && (sq->tail - sq->head) > MAX_MIXED_COUNT) {
+hw/block/tmp/tmp_nvme.c:		printf("MIXED - %u-%u\n", sq->head, sq->tail);
+hw/block/tmp/tmp_nvme.c:	if (!(nvme_sq_empty(sq) || QTAILQ_EMPTY(&sq->req_list)) && processed++ < sq->arb_burst) {
+hw/block/tmp/tmp_nvme.c:            printf("nvme_process_sq_io: start sq->head %d sq->tail %d\n", sq->head, sq->tail);
+hw/block/tmp/tmp_nvme.c:		for(cmd_off_iter = sq->head; cmd_off_iter != sq->tail; cmd_off_iter = (cmd_off_iter + 1) % sq->size) {
+hw/block/tmp/tmp_nvme.c:			req = &sq->io_req[cmd_off_iter];
+hw/block/tmp/tmp_nvme.c:			if (sq->phys_contig)
+hw/block/tmp/tmp_nvme.c:				addr = sq->dma_addr + req_idx * n->sqe_size;
+hw/block/tmp/tmp_nvme.c:				addr = nvme_discontig(sq->prp_list, req_idx, n->page_size, n->sqe_size);
+hw/block/tmp/tmp_nvme.c:			if(sq->head_bitmap[req->cmd_idx] == 0) {
+hw/block/tmp/tmp_nvme.c:					sq->head_bitmap[req->cmd_idx] = 1;
+hw/block/tmp/tmp_nvme.c:					sq->head_bitmap[req->cmd_idx] = 1;
+hw/block/tmp/tmp_nvme.c:		for(cmd_off_iter = sq->head; cmd_off_iter != sq->tail; cmd_off_iter = (cmd_off_iter + 1) % sq->size) {
+hw/block/tmp/tmp_nvme.c:			req = &sq->io_req[cmd_off_iter];
+hw/block/tmp/tmp_nvme.c:			if (sq->head_bitmap[req->cmd_idx] != 1) {
+hw/block/tmp/tmp_nvme.c:					printf("nvme_process_sq_io: head %d tail %d cmd_idx %d bitmap: %d bank %d lbn %d lpoff %d off_in_page %d   %d-%d  isIM %u\n", sq->head, sq->tail, req->cmd_idx, sq->head_bitmap[req->cmd_idx], bank, lbn, lpoff, off_in_page, (lpn * sc->LPAGE_PER_PPAGE) / (sc->PAGE_NB * sc->LPAGE_PER_PPAGE * sc->NUM_BANKS), (lpn*sc->LPAGE_PER_PPAGE + off_in_page) % (sc->PAGE_NB * sc->LPAGE_PER_PPAGE * sc->NUM_BANKS), sector_nb == ADDR_INTERNAL_MERGE);
+hw/block/tmp/tmp_nvme.c:								sq->head_bitmap[req->cmd_idx]  = 1;
+hw/block/tmp/tmp_nvme.c:						printf("Finish	READ? %d tail %d cmd_idx %d haed_bitmap: %u bank %d lbn %d lpoff %d off_in_page %d   %d-%d  isIM %u   %x\n", sq->head, sq->tail, req->cmd_idx, sq->head_bitmap[req->cmd_idx], bank, lbn, lpoff, off_in_page, (lpn * sc->LPAGE_PER_PPAGE) / (sc->LPAGE_PER_PPAGE * sc->PAGE_NB * sc->NUM_BANKS), (lpn*sc->LPAGE_PER_PPAGE + off_in_page) % (sc->LPAGE_PER_PPAGE * sc->PAGE_NB * sc->NUM_BANKS), sector_nb == ADDR_INTERNAL_MERGE, rw);
+hw/block/tmp/tmp_nvme.c:								printf("NonFinish	READ? %d tail %d cmd_idx %d haed_bitmap: %u bank %d lbn %d lpoff %d off_in_page %d   %d-%d  isIM %u   %x\n", sq->head, sq->tail, req->cmd_idx, sq->head_bitmap[req->cmd_idx], bank, lbn, lpoff, off_in_page, (lpn * sc->LPAGE_PER_PPAGE) / (sc->LPAGE_PER_PPAGE * sc->PAGE_NB * sc->NUM_BANKS), (lpn*sc->LPAGE_PER_PPAGE + off_in_page) % (sc->LPAGE_PER_PPAGE * sc->PAGE_NB * sc->NUM_BANKS), sector_nb == ADDR_INTERNAL_MERGE, rw);
+hw/block/tmp/tmp_nvme.c:							printf("Finish	READ? %d tail %d cmd_idx %d haed_bitmap: %u bank %d lbn %d lpoff %d off_in_page %d   %d-%d  isIM %u   %x\n", sq->head, sq->tail, req->cmd_idx, sq->head_bitmap[req->cmd_idx], bank, lbn, lpoff, off_in_page, (lpn * sc->LPAGE_PER_PPAGE) / (sc->LPAGE_PER_PPAGE * sc->PAGE_NB * sc->NUM_BANKS), (lpn*sc->LPAGE_PER_PPAGE + off_in_page) % (sc->LPAGE_PER_PPAGE * sc->PAGE_NB * sc->NUM_BANKS), sector_nb == ADDR_INTERNAL_MERGE, rw);
+hw/block/tmp/tmp_nvme.c:     * newly submitted I/Os during next sq->timer triggering
+hw/block/tmp/tmp_nvme.c:    sq->completed += processed;
+hw/block/tmp/tmp_nvme.c:	if(last_tail == sq->tail)
+hw/block/tmp/tmp_nvme.c:		last_tail = sq->tail;
+hw/block/tmp/tmp_nvme.c:    timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + SQ_POLLING_PERIOD_NS);
+hw/block/tmp/tmp_nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/tmp/tmp_nvme.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/tmp/tmp_nvme.c:    while (!(nvme_sq_empty(sq) || QTAILQ_EMPTY(&sq->req_list)) &&
+hw/block/tmp/tmp_nvme.c:            processed++ < sq->arb_burst) {
+hw/block/tmp/tmp_nvme.c:        if (sq->phys_contig) {
+hw/block/tmp/tmp_nvme.c:            addr = sq->dma_addr + sq->head * n->sqe_size;
+hw/block/tmp/tmp_nvme.c:            addr = nvme_discontig(sq->prp_list, sq->head, n->page_size,
+hw/block/tmp/tmp_nvme.c:        req = QTAILQ_FIRST(&sq->req_list);
+hw/block/tmp/tmp_nvme.c:        QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/tmp/tmp_nvme.c:        QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/tmp/tmp_nvme.c:        status = sq->sqid ? nvme_io_cmd(n, &cmd, req) :
+hw/block/tmp/tmp_nvme.c:     * newly submitted I/Os during next sq->timer triggering
+hw/block/tmp/tmp_nvme.c:    sq->completed += processed;
+hw/block/tmp/tmp_nvme.c:    if (sq->sqid) {
+hw/block/tmp/tmp_nvme.c:        timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + 10000);
+hw/block/tmp/tmp_nvme.c:                if (!timer_pending(sq->timer)) {
+hw/block/tmp/tmp_nvme.c:                    if (sq->sqid == 0)
+hw/block/tmp/tmp_nvme.c:                        timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + 500);
+hw/block/tmp/tmp_nvme.c:        if (new_val >= sq->size) {
+hw/block/tmp/tmp_nvme.c:        if (!sq->db_addr) {
+hw/block/tmp/tmp_nvme.c:            sq->tail = new_val;
+hw/block/tmp/tmp_nvme.c:        if (!timer_pending(sq->timer)) {
+hw/block/tmp/tmp_nvme.c:            if (sq->sqid == 0)
+hw/block/tmp/tmp_nvme.c:                timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + 500);
+hw/block/tmp/nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/tmp/nvme.c:	QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/tmp/nvme.c:	QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/tmp/nvme.c:		sq->head_bitmap[req->cmd_idx] = 3;
+hw/block/tmp/nvme.c:	if (req->cmd_idx == sq->head) nvme_update_sq_head(sq);
+hw/block/tmp/nvme.c:    sq->head = (sq->head + 1) % sq->size;
+hw/block/tmp/nvme.c:// SOMM: Update the sq->head by referring to the sq->head_bitmap.
+hw/block/tmp/nvme.c:	int idx = sq->head % sq->size;
+hw/block/tmp/nvme.c:	while (idx != sq->tail) {
+hw/block/tmp/nvme.c:		if (sq->head_bitmap[idx] != 3)
+hw/block/tmp/nvme.c:		sq->head_bitmap[idx] = 0;
+hw/block/tmp/nvme.c:		idx = (idx + 1) % sq->size;
+hw/block/tmp/nvme.c:	sq->head = idx;
+hw/block/tmp/nvme.c:    return sq->head == sq->tail;
+hw/block/tmp/nvme.c:    cqe->sq_id = cpu_to_le16(sq->sqid);
+hw/block/tmp/nvme.c:    cqe->sq_head = cpu_to_le16(sq->head);
+hw/block/tmp/nvme.c:    QTAILQ_INSERT_TAIL(&sq->req_list, req, entry);
+hw/block/tmp/nvme.c:	assert(cq->cqid == req->sq->cqid);
+hw/block/tmp/nvme.c:	QTAILQ_REMOVE(&req->sq->out_req_list, req, entry);
+hw/block/tmp/nvme.c:    assert(cq->cqid == req->sq->cqid);
+hw/block/tmp/nvme.c:    QTAILQ_REMOVE(&req->sq->out_req_list, req, entry);
+hw/block/tmp/nvme.c:    assert(cq->cqid == req->sq->cqid);
+hw/block/tmp/nvme.c:    QTAILQ_REMOVE(&req->sq->out_req_list, req, entry);
+hw/block/tmp/nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/tmp/nvme.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/tmp/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/tmp/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tmp/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tmp/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tmp/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_UNRECOVERED_READ,
+hw/block/tmp/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tmp/nvme.c:            nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tmp/nvme.c:                nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/tmp/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/tmp/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tmp/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tmp/nvme.c:            nvme_set_error_page(n, req->sq->sqid, req->cqe.cid,
+hw/block/tmp/nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/tmp/nvme.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/tmp/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/tmp/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/tmp/nvme.c:    n->sq[sq->sqid] = NULL;
+hw/block/tmp/nvme.c:    timer_del(sq->timer);
+hw/block/tmp/nvme.c:    timer_free(sq->timer);
+hw/block/tmp/nvme.c:    g_free(sq->io_req);
+hw/block/tmp/nvme.c:    if (sq->prp_list) {
+hw/block/tmp/nvme.c:        g_free(sq->prp_list);
+hw/block/tmp/nvme.c:    if (sq->sqid) {
+hw/block/tmp/nvme.c:    QTAILQ_FOREACH_SAFE(req, &sq->out_req_list, entry, next) {
+hw/block/tmp/nvme.c:    if (!nvme_check_cqid(n, sq->cqid)) {
+hw/block/tmp/nvme.c:        cq = n->cq[sq->cqid];
+hw/block/tmp/nvme.c:                QTAILQ_INSERT_TAIL(&sq->req_list, req, entry);
+hw/block/tmp/nvme.c:    sq->ctrl = n;
+hw/block/tmp/nvme.c:    sq->sqid = sqid;
+hw/block/tmp/nvme.c:    sq->size = size;
+hw/block/tmp/nvme.c:    sq->cqid = cqid;
+hw/block/tmp/nvme.c:    sq->head = sq->tail = 0;
+hw/block/tmp/nvme.c:    sq->phys_contig = contig;
+hw/block/tmp/nvme.c:    if (sq->phys_contig) {
+hw/block/tmp/nvme.c:        sq->dma_addr = dma_addr;
+hw/block/tmp/nvme.c:        sq->prp_list = nvme_setup_discontig(n, dma_addr, size, n->sqe_size);
+hw/block/tmp/nvme.c:        if (!sq->prp_list) {
+hw/block/tmp/nvme.c:	sq->last_sq_index = 0;
+hw/block/tmp/nvme.c:    sq->io_req = g_malloc0(sq->size * sizeof(*sq->io_req));
+hw/block/tmp/nvme.c:	sq->io_cmd = g_malloc0(sq->size * sizeof(*sq->io_cmd));
+hw/block/tmp/nvme.c:	sq->head_bitmap = g_malloc0(sq->size * sizeof(*sq->head_bitmap));
+hw/block/tmp/nvme.c:    QTAILQ_INIT(&sq->req_list);
+hw/block/tmp/nvme.c:    QTAILQ_INIT(&sq->out_req_list);
+hw/block/tmp/nvme.c:	QTAILQ_INIT(&sq->cmd_list);
+hw/block/tmp/nvme.c:    for (i = 0; i < sq->size; i++) {
+hw/block/tmp/nvme.c:        sq->io_req[i].sq = sq;
+hw/block/tmp/nvme.c:	sq->io_req[i].cmd_idx = i;
+hw/block/tmp/nvme.c:        QTAILQ_INSERT_TAIL(&(sq->req_list), &sq->io_req[i], entry);
+hw/block/tmp/nvme.c:		sq->io_cmd[i].num = i;
+hw/block/tmp/nvme.c:		sq->head_bitmap[i] = 0;
+hw/block/tmp/nvme.c:        sq->arb_burst = (1 << NVME_ARB_AB(n->features.arbitration));
+hw/block/tmp/nvme.c:        sq->arb_burst = NVME_ARB_HPW(n->features.arbitration) + 1;
+hw/block/tmp/nvme.c:        sq->arb_burst = NVME_ARB_MPW(n->features.arbitration) + 1;
+hw/block/tmp/nvme.c:        sq->arb_burst = NVME_ARB_LPW(n->features.arbitration) + 1;
+hw/block/tmp/nvme.c:        sq->timer = timer_new_ns(QEMU_CLOCK_REALTIME, nvme_process_sq_admin, sq);
+hw/block/tmp/nvme.c:        sq->timer = timer_new_ns(QEMU_CLOCK_REALTIME, nvme_process_sq_io, sq);
+hw/block/tmp/nvme.c:		sq->db_addr = n->dbs_addr + 2 * sqid * dbbuf_entry_sz;
+hw/block/tmp/nvme.c:		sq->eventidx_addr = n->eis_addr + 2 * sqid * dbbuf_entry_sz;
+hw/block/tmp/nvme.c:		printf("Coperd, SQ, db_addr=%" PRIu64 ", eventidx_addr=%" PRIu64 "\n", sq->db_addr, sq->eventidx_addr);
+hw/block/tmp/nvme.c:        timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + 1000000);
+hw/block/tmp/nvme.c:    QTAILQ_FOREACH_SAFE(req, &sq->out_req_list, entry, next) {
+hw/block/tmp/nvme.c:        if (sq->sqid) {
+hw/block/tmp/nvme.c:    while ((sq->head + index) % sq->size != sq->tail) {
+hw/block/tmp/nvme.c:        if (sq->phys_contig) {
+hw/block/tmp/nvme.c:            addr = sq->dma_addr + ((sq->head + index) % sq->size) *
+hw/block/tmp/nvme.c:            addr = nvme_discontig(sq->prp_list, (sq->head + index) % sq->size,
+hw/block/tmp/nvme.c:            req = QTAILQ_FIRST(&sq->req_list);
+hw/block/tmp/nvme.c:            QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/tmp/nvme.c:            QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/tmp/nvme.c:            nvme_enqueue_req_completion(n->cq[sq->cqid], req);
+hw/block/tmp/nvme.c:            sq->db_addr = dbs_addr + 2 * i * dbbuf_entry_sz;
+hw/block/tmp/nvme.c:            sq->eventidx_addr = eis_addr + 2 * i * dbbuf_entry_sz;
+hw/block/tmp/nvme.c:                    i, sq->db_addr, sq->eventidx_addr);
+hw/block/tmp/nvme.c:    if (sq->eventidx_addr) {
+hw/block/tmp/nvme.c:        nvme_addr_write(sq->ctrl, sq->eventidx_addr, (void *)&sq->tail,
+hw/block/tmp/nvme.c:            sizeof(sq->tail));
+hw/block/tmp/nvme.c:    if (sq->db_addr) {
+hw/block/tmp/nvme.c:        nvme_addr_read(sq->ctrl, sq->db_addr, &sq->tail, sizeof(sq->tail));
+hw/block/tmp/nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/tmp/nvme.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/tmp/nvme.c:    while (!(nvme_sq_empty(sq) || QTAILQ_EMPTY(&sq->req_list)) &&
+hw/block/tmp/nvme.c:            processed++ < sq->arb_burst) {
+hw/block/tmp/nvme.c:        if (sq->phys_contig) {
+hw/block/tmp/nvme.c:            addr = sq->dma_addr + sq->head * n->sqe_size;
+hw/block/tmp/nvme.c:            addr = nvme_discontig(sq->prp_list, sq->head, n->page_size,
+hw/block/tmp/nvme.c:        req = QTAILQ_FIRST(&sq->req_list);
+hw/block/tmp/nvme.c:        QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/tmp/nvme.c:        QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/tmp/nvme.c:        assert(cq->cqid == req->sq->cqid && sq->sqid == 0);
+hw/block/tmp/nvme.c:     * newly submitted I/Os during next sq->timer triggering
+hw/block/tmp/nvme.c:    sq->completed += processed;
+hw/block/tmp/nvme.c:	NvmeCtrl *n = sq->ctrl;
+hw/block/tmp/nvme.c:	NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/tmp/nvme.c:	if (!(nvme_sq_empty(sq) || QTAILQ_EMPTY(&sq->req_list)) && processed++ < sq->arb_burst) {
+hw/block/tmp/nvme.c:		for(cmd_off_iter = sq->head; cmd_off_iter != sq->tail; cmd_off_iter = (cmd_off_iter + 1) % sq->size) {
+hw/block/tmp/nvme.c:			req = &sq->io_req[cmd_off_iter];
+hw/block/tmp/nvme.c:			if (sq->phys_contig)
+hw/block/tmp/nvme.c:				addr = sq->dma_addr + req_idx * n->sqe_size;
+hw/block/tmp/nvme.c:				addr = nvme_discontig(sq->prp_list, req_idx, n->page_size, n->sqe_size);
+hw/block/tmp/nvme.c:			if(sq->head_bitmap[req->cmd_idx] == 0) {
+hw/block/tmp/nvme.c:				sq->head_bitmap[req->cmd_idx] = 1;
+hw/block/tmp/nvme.c:		for(cmd_off_iter = sq->head; cmd_off_iter != sq->tail; cmd_off_iter = (cmd_off_iter + 1) % sq->size) {
+hw/block/tmp/nvme.c:			req = &sq->io_req[cmd_off_iter];
+hw/block/tmp/nvme.c:			if (sq->head_bitmap[req->cmd_idx] == 0 || sq->head_bitmap[req->cmd_idx] == 3) {
+hw/block/tmp/nvme.c:				if(sq->head_bitmap[req->cmd_idx] == 1) {
+hw/block/tmp/nvme.c:						sq->head_bitmap[req->cmd_idx] = 2;
+hw/block/tmp/nvme.c:						sq->head_bitmap[req->cmd_idx] = 2;
+hw/block/tmp/nvme.c:	 * newly submitted I/Os during next sq->timer triggering
+hw/block/tmp/nvme.c:	sq->completed += processed;
+hw/block/tmp/nvme.c:	timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + SQ_POLLING_PERIOD_NS);
+hw/block/tmp/nvme.c:                if (!timer_pending(sq->timer)) {
+hw/block/tmp/nvme.c:                    if (sq->sqid == 0)
+hw/block/tmp/nvme.c:                        timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + 500);
+hw/block/tmp/nvme.c:        if (new_val >= sq->size) {
+hw/block/tmp/nvme.c:        if (!sq->db_addr) {
+hw/block/tmp/nvme.c:            sq->tail = new_val;
+hw/block/tmp/nvme.c:        if (!timer_pending(sq->timer)) {
+hw/block/tmp/nvme.c:            if (sq->sqid == 0)
+hw/block/tmp/nvme.c:                timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + 500);
+Binary file hw/block/cscope.out matches
+hw/block/tail:nvme_back.c:    sq->head = (sq->head + 1) % sq->size;
+hw/block/tail:nvme_back.c:// SOMM: Update the sq->head by referring to the sq->head_bitmap.
+hw/block/tail:nvme_back.c:	int idx = (sq->head + 1) % sq->size;
+hw/block/tail:nvme_back.c:	while (idx != sq->tail) {
+hw/block/tail:nvme_back.c:		if (!sq->head_bitmap[idx])
+hw/block/tail:nvme_back.c:		idx = (idx + 1) % sq->size;
+hw/block/tail:nvme_back.c:	printf("nvme_update_sq_head: sq->head %d new head %d\n", sq->head, idx);
+hw/block/tail:nvme_back.c:	sq->head = idx;
+hw/block/tail:nvme_back.c:    return sq->head == sq->tail;
+hw/block/tail:nvme_back.c:    cqe->sq_id = cpu_to_le16(sq->sqid);
+hw/block/tail:nvme_back.c:    cqe->sq_head = cpu_to_le16(sq->head);
+hw/block/tail:nvme_back.c:    QTAILQ_INSERT_TAIL(&sq->req_list, req, entry);
+hw/block/tail:nvme_back.c:	assert(cq->cqid == req->sq->cqid);
+hw/block/tail:nvme_back.c:	QTAILQ_REMOVE(&req->sq->out_req_list, req, entry);
+hw/block/tail:nvme_back.c:    assert(cq->cqid == req->sq->cqid);
+hw/block/tail:nvme_back.c:    QTAILQ_REMOVE(&req->sq->out_req_list, req, entry);
+hw/block/tail:nvme_back.c:    assert(cq->cqid == req->sq->cqid);
+hw/block/tail:nvme_back.c:    QTAILQ_REMOVE(&req->sq->out_req_list, req, entry);
+hw/block/tail:nvme_back.c:    assert(cq->cqid == req->sq->cqid);
+hw/block/tail:nvme_back.c:    QTAILQ_REMOVE(&req->sq->out_req_list, req, entry);
+hw/block/tail:nvme_back.c:    notify = coalesce_disabled || !req->sq->sqid || !time_ns ||
+hw/block/tail:nvme_back.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/tail:nvme_back.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/tail:nvme_back.c:        nvme_set_error_page(n, sq->sqid, req->cqe.cid, req->status,
+hw/block/tail:nvme_back.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/tail:nvme_back.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tail:nvme_back.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tail:nvme_back.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tail:nvme_back.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_UNRECOVERED_READ,
+hw/block/tail:nvme_back.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tail:nvme_back.c:            nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tail:nvme_back.c:                nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/tail:nvme_back.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/tail:nvme_back.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tail:nvme_back.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tail:nvme_back.c:            nvme_set_error_page(n, req->sq->sqid, req->cqe.cid,
+hw/block/tail:nvme_back.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/tail:nvme_back.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/tail:nvme_back.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/tail:nvme_back.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/tail:nvme_back.c:    n->sq[sq->sqid] = NULL;
+hw/block/tail:nvme_back.c:    timer_del(sq->timer);
+hw/block/tail:nvme_back.c:    timer_free(sq->timer);
+hw/block/tail:nvme_back.c:    g_free(sq->io_req);
+hw/block/tail:nvme_back.c:    if (sq->prp_list) {
+hw/block/tail:nvme_back.c:        g_free(sq->prp_list);
+hw/block/tail:nvme_back.c:    if (sq->sqid) {
+hw/block/tail:nvme_back.c:    QTAILQ_FOREACH_SAFE(req, &sq->out_req_list, entry, next) {
+hw/block/tail:nvme_back.c:    if (!nvme_check_cqid(n, sq->cqid)) {
+hw/block/tail:nvme_back.c:        cq = n->cq[sq->cqid];
+hw/block/tail:nvme_back.c:                QTAILQ_INSERT_TAIL(&sq->req_list, req, entry);
+hw/block/tail:nvme_back.c:    sq->ctrl = n;
+hw/block/tail:nvme_back.c:    sq->sqid = sqid;
+hw/block/tail:nvme_back.c:    sq->size = size;
+hw/block/tail:nvme_back.c:    sq->cqid = cqid;
+hw/block/tail:nvme_back.c:    sq->head = sq->tail = 0;
+hw/block/tail:nvme_back.c:    sq->phys_contig = contig;
+hw/block/tail:nvme_back.c:    if (sq->phys_contig) {
+hw/block/tail:nvme_back.c:        sq->dma_addr = dma_addr;
+hw/block/tail:nvme_back.c:        sq->prp_list = nvme_setup_discontig(n, dma_addr, size, n->sqe_size);
+hw/block/tail:nvme_back.c:        if (!sq->prp_list) {
+hw/block/tail:nvme_back.c:	sq->last_sq_index = 0;
+hw/block/tail:nvme_back.c:    sq->io_req = g_malloc0(sq->size * sizeof(*sq->io_req));
+hw/block/tail:nvme_back.c:	sq->io_cmd = g_malloc0(sq->size * sizeof(*sq->io_cmd));
+hw/block/tail:nvme_back.c:	sq->head_bitmap = g_malloc0(sq->size * sizeof(*sq->head_bitmap));
+hw/block/tail:nvme_back.c:    QTAILQ_INIT(&sq->req_list);
+hw/block/tail:nvme_back.c:    QTAILQ_INIT(&sq->out_req_list);
+hw/block/tail:nvme_back.c:	QTAILQ_INIT(&sq->cmd_list);
+hw/block/tail:nvme_back.c:    for (i = 0; i < sq->size; i++) {
+hw/block/tail:nvme_back.c:        sq->io_req[i].sq = sq;
+hw/block/tail:nvme_back.c:        QTAILQ_INSERT_TAIL(&(sq->req_list), &sq->io_req[i], entry);
+hw/block/tail:nvme_back.c:		sq->io_cmd[i].num = i;
+hw/block/tail:nvme_back.c:		sq->head_bitmap[i] = 0;
+hw/block/tail:nvme_back.c:        sq->arb_burst = (1 << NVME_ARB_AB(n->features.arbitration));
+hw/block/tail:nvme_back.c:        sq->arb_burst = NVME_ARB_HPW(n->features.arbitration) + 1;
+hw/block/tail:nvme_back.c:        sq->arb_burst = NVME_ARB_MPW(n->features.arbitration) + 1;
+hw/block/tail:nvme_back.c:        sq->arb_burst = NVME_ARB_LPW(n->features.arbitration) + 1;
+hw/block/tail:nvme_back.c:        sq->timer = timer_new_ns(QEMU_CLOCK_REALTIME, nvme_process_sq_admin, sq);
+hw/block/tail:nvme_back.c:        sq->timer = timer_new_ns(QEMU_CLOCK_REALTIME, nvme_process_sq_io, sq);
+hw/block/tail:nvme_back.c:		sq->db_addr = n->dbs_addr + 2 * sqid * dbbuf_entry_sz;
+hw/block/tail:nvme_back.c:		sq->eventidx_addr = n->eis_addr + 2 * sqid * dbbuf_entry_sz;
+hw/block/tail:nvme_back.c:		printf("Coperd, SQ, db_addr=%" PRIu64 ", eventidx_addr=%" PRIu64 "\n", sq->db_addr, sq->eventidx_addr);
+hw/block/tail:nvme_back.c:        timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + 1000000);
+hw/block/tail:nvme_back.c:    QTAILQ_FOREACH_SAFE(req, &sq->out_req_list, entry, next) {
+hw/block/tail:nvme_back.c:        if (sq->sqid) {
+hw/block/tail:nvme_back.c:    while ((sq->head + index) % sq->size != sq->tail) {
+hw/block/tail:nvme_back.c:        if (sq->phys_contig) {
+hw/block/tail:nvme_back.c:            addr = sq->dma_addr + ((sq->head + index) % sq->size) *
+hw/block/tail:nvme_back.c:            addr = nvme_discontig(sq->prp_list, (sq->head + index) % sq->size,
+hw/block/tail:nvme_back.c:            req = QTAILQ_FIRST(&sq->req_list);
+hw/block/tail:nvme_back.c:            QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/tail:nvme_back.c:            QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/tail:nvme_back.c:            nvme_enqueue_req_completion(n->cq[sq->cqid], req);
+hw/block/tail:nvme_back.c:            sq->db_addr = dbs_addr + 2 * i * dbbuf_entry_sz;
+hw/block/tail:nvme_back.c:            sq->eventidx_addr = eis_addr + 2 * i * dbbuf_entry_sz;
+hw/block/tail:nvme_back.c:                    i, sq->db_addr, sq->eventidx_addr);
+hw/block/tail:nvme_back.c:    if (sq->eventidx_addr) {
+hw/block/tail:nvme_back.c:        nvme_addr_write(sq->ctrl, sq->eventidx_addr, (void *)&sq->tail,
+hw/block/tail:nvme_back.c:            sizeof(sq->tail));
+hw/block/tail:nvme_back.c:    if (sq->db_addr) {
+hw/block/tail:nvme_back.c:        nvme_addr_read(sq->ctrl, sq->db_addr, &sq->tail, sizeof(sq->tail));
+hw/block/tail:nvme_back.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/tail:nvme_back.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/tail:nvme_back.c:    while (!(nvme_sq_empty(sq) || QTAILQ_EMPTY(&sq->req_list)) &&
+hw/block/tail:nvme_back.c:            processed++ < sq->arb_burst) {
+hw/block/tail:nvme_back.c:        if (sq->phys_contig) {
+hw/block/tail:nvme_back.c:            addr = sq->dma_addr + sq->head * n->sqe_size;
+hw/block/tail:nvme_back.c:            addr = nvme_discontig(sq->prp_list, sq->head, n->page_size,
+hw/block/tail:nvme_back.c:        req = QTAILQ_FIRST(&sq->req_list);
+hw/block/tail:nvme_back.c:        QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/tail:nvme_back.c:        QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/tail:nvme_back.c:        assert(cq->cqid == req->sq->cqid && sq->sqid == 0);
+hw/block/tail:nvme_back.c:     * newly submitted I/Os during next sq->timer triggering
+hw/block/tail:nvme_back.c:    sq->completed += processed;
+hw/block/tail:nvme_back.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/tail:nvme_back.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/tail:nvme_back.c:	QTAILQ_INIT(&sq->cmd_list);
+hw/block/tail:nvme_back.c://	sq_ptr = sq->last_sq_index;
+hw/block/tail:nvme_back.c:	while (sq->last_sq_index != sq->tail) {
+hw/block/tail:nvme_back.c:		sq->io_cmd[sq->last_sq_index].num = sq->last_sq_index;
+hw/block/tail:nvme_back.c:		QTAILQ_INSERT_TAIL(&(sq->cmd_list), &sq->io_cmd[sq->last_sq_index], entry);
+hw/block/tail:nvme_back.c:		sq->head_bitmap[sq->last_sq_index] = 0;
+hw/block/tail:nvme_back.c:		sq->last_sq_index = (sq->last_sq_index + 1) % sq->size;
+hw/block/tail:nvme_back.c:	while (!(nvme_sq_empty(sq) || QTAILQ_EMPTY(&sq->req_list)) && processed < sq->arb_burst) {
+hw/block/tail:nvme_back.c:		while (sq->last_sq_index != sq->tail) {
+hw/block/tail:nvme_back.c:			sq->io_cmd[sq->last_sq_index].num = sq->last_sq_index;
+hw/block/tail:nvme_back.c:			QTAILQ_INSERT_TAIL(&(sq->cmd_list), &sq->io_cmd[sq->last_sq_index], entry);
+hw/block/tail:nvme_back.c:			sq->head_bitmap[sq->last_sq_index] = 0;
+hw/block/tail:nvme_back.c:			sq->last_sq_index = (sq->last_sq_index + 1) % sq->size;
+hw/block/tail:nvme_back.c:		QTAILQ_FOREACH_SAFE(tq, &sq->cmd_list, entry, next)
+hw/block/tail:nvme_back.c:		QTAILQ_FOREACH_SAFE(req, &sq->req_list, entry, next)
+hw/block/tail:nvme_back.c:		printf("nvme_process_sq_io: head %d tail %d i %d cmd_cnt %d req_cnt %d\n", sq->head, sq->tail, i++, cmd_cnt, req_cnt);
+hw/block/tail:nvme_back.c:		QTAILQ_FOREACH_SAFE(tq, &sq->cmd_list, entry, next) {
+hw/block/tail:nvme_back.c://			printf("nvme_process_sq_io: sq->head %d sq->tail %d sq->last_sq_index %d tq->num %d %p seq_num %d\n", sq->head, sq->tail, sq->last_sq_index, tq->num, tq, seq_num);
+hw/block/tail:nvme_back.c:			if (sq->phys_contig)
+hw/block/tail:nvme_back.c:				addr = sq->dma_addr + tq->num * n->sqe_size;
+hw/block/tail:nvme_back.c:				addr = nvme_discontig(sq->prp_list, tq->num, n->page_size, n->sqe_size);
+hw/block/tail:nvme_back.c:				QTAILQ_REMOVE(&sq->cmd_list, tq, entry);
+hw/block/tail:nvme_back.c:					QTAILQ_FOREACH_SAFE(req, &sq->req_list, entry, next) {
+hw/block/tail:nvme_back.c:									if (tq->num == sq->head) nvme_update_sq_head(sq);
+hw/block/tail:nvme_back.c:									QTAILQ_REMOVE(&sq->cmd_list, tq, entry);
+hw/block/tail:nvme_back.c:									QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/tail:nvme_back.c:									QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/tail:nvme_back.c:									sq->head_bitmap[tq->num] = 1;
+hw/block/tail:nvme_back.c:					QTAILQ_FOREACH_SAFE(req, &sq->req_list, entry, next) {
+hw/block/tail:nvme_back.c:									if (tq->num == sq->head) nvme_update_sq_head(sq);
+hw/block/tail:nvme_back.c:									QTAILQ_REMOVE(&sq->cmd_list, tq, entry);
+hw/block/tail:nvme_back.c:									QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/tail:nvme_back.c:									QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/tail:nvme_back.c:									sq->head_bitmap[tq->num] = 1;
+hw/block/tail:nvme_back.c:							QTAILQ_FOREACH_SAFE(req, &sq->req_list, entry, next) {
+hw/block/tail:nvme_back.c:									if (tq->num == sq->head) nvme_update_sq_head(sq);
+hw/block/tail:nvme_back.c:									QTAILQ_REMOVE(&sq->cmd_list, tq, entry);
+hw/block/tail:nvme_back.c:									QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/tail:nvme_back.c:									QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/tail:nvme_back.c:									sq->head_bitmap[tq->num] = 1;
+hw/block/tail:nvme_back.c:				QTAILQ_FOREACH_SAFE(req, &sq->req_list, entry, next) {
+hw/block/tail:nvme_back.c:						if (tq->num == sq->head) nvme_update_sq_head(sq);
+hw/block/tail:nvme_back.c:						QTAILQ_REMOVE(&sq->cmd_list, tq, entry);
+hw/block/tail:nvme_back.c:						QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/tail:nvme_back.c:						QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/tail:nvme_back.c:						sq->head_bitmap[tq->num] = 1;
+hw/block/tail:nvme_back.c:    while (!(nvme_sq_empty(sq) || QTAILQ_EMPTY(&sq->req_list)) &&
+hw/block/tail:nvme_back.c:            processed++ < sq->arb_burst) {
+hw/block/tail:nvme_back.c:        if (sq->phys_contig) {
+hw/block/tail:nvme_back.c:            addr = sq->dma_addr + sq->head * n->sqe_size;
+hw/block/tail:nvme_back.c:            addr = nvme_discontig(sq->prp_list, sq->head, n->page_size,
+hw/block/tail:nvme_back.c:        req = QTAILQ_FIRST(&sq->req_list);
+hw/block/tail:nvme_back.c:        QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/tail:nvme_back.c:        QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/tail:nvme_back.c:     * newly submitted I/Os during next sq->timer triggering
+hw/block/tail:nvme_back.c:    sq->completed += processed;
+hw/block/tail:nvme_back.c:    timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + SQ_POLLING_PERIOD_NS);
+hw/block/tail:nvme_back.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/tail:nvme_back.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/tail:nvme_back.c:    while (!(nvme_sq_empty(sq) || QTAILQ_EMPTY(&sq->req_list)) &&
+hw/block/tail:nvme_back.c:            processed++ < sq->arb_burst) {
+hw/block/tail:nvme_back.c:        if (sq->phys_contig) {
+hw/block/tail:nvme_back.c:            addr = sq->dma_addr + sq->head * n->sqe_size;
+hw/block/tail:nvme_back.c:            addr = nvme_discontig(sq->prp_list, sq->head, n->page_size,
+hw/block/tail:nvme_back.c:        req = QTAILQ_FIRST(&sq->req_list);
+hw/block/tail:nvme_back.c:        QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/tail:nvme_back.c:        QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/tail:nvme_back.c:        status = sq->sqid ? nvme_io_cmd(n, &cmd, req) :
+hw/block/tail:nvme_back.c:     * newly submitted I/Os during next sq->timer triggering
+hw/block/tail:nvme_back.c:    sq->completed += processed;
+hw/block/tail:nvme_back.c:    if (sq->sqid) {
+hw/block/tail:nvme_back.c:        timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + 10000);
+hw/block/tail:nvme_back.c:                if (!timer_pending(sq->timer)) {
+hw/block/tail:nvme_back.c:                    if (sq->sqid == 0)
+hw/block/tail:nvme_back.c:                        timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + 500);
+hw/block/tail:nvme_back.c:        if (new_val >= sq->size) {
+hw/block/tail:nvme_back.c:        if (!sq->db_addr) {
+hw/block/tail:nvme_back.c:            sq->tail = new_val;
+hw/block/tail:nvme_back.c:        if (!timer_pending(sq->timer)) {
+hw/block/tail:nvme_back.c:            if (sq->sqid == 0)
+hw/block/tail:nvme_back.c:                timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + 500);
+hw/block/tail:nvme.c:    sq->head = (sq->head + 1) % sq->size;
+hw/block/tail:nvme.c:// SOMM: Update the sq->head by referring to the sq->head_bitmap.
+hw/block/tail:nvme.c:	int idx = (sq->head + 1) % sq->size;
+hw/block/tail:nvme.c:	while (idx != sq->tail) {
+hw/block/tail:nvme.c:		if (!sq->head_bitmap[idx])
+hw/block/tail:nvme.c:		idx = (idx + 1) % sq->size;
+hw/block/tail:nvme.c:	printf("nvme_update_sq_head: sq->head %d new head %d\n", sq->head, idx);
+hw/block/tail:nvme.c:	sq->head = idx;
+hw/block/tail:nvme.c:    return sq->head == sq->tail;
+hw/block/tail:nvme.c:    cqe->sq_id = cpu_to_le16(sq->sqid);
+hw/block/tail:nvme.c:    cqe->sq_head = cpu_to_le16(sq->head);
+hw/block/tail:nvme.c:    QTAILQ_INSERT_TAIL(&sq->req_list, req, entry);
+hw/block/tail:nvme.c:	assert(cq->cqid == req->sq->cqid);
+hw/block/tail:nvme.c:	QTAILQ_REMOVE(&req->sq->out_req_list, req, entry);
+hw/block/tail:nvme.c:    assert(cq->cqid == req->sq->cqid);
+hw/block/tail:nvme.c:    QTAILQ_REMOVE(&req->sq->out_req_list, req, entry);
+hw/block/tail:nvme.c:    assert(cq->cqid == req->sq->cqid);
+hw/block/tail:nvme.c:    QTAILQ_REMOVE(&req->sq->out_req_list, req, entry);
+hw/block/tail:nvme.c:    assert(cq->cqid == req->sq->cqid);
+hw/block/tail:nvme.c:    QTAILQ_REMOVE(&req->sq->out_req_list, req, entry);
+hw/block/tail:nvme.c:    notify = coalesce_disabled || !req->sq->sqid || !time_ns ||
+hw/block/tail:nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/tail:nvme.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/tail:nvme.c:        nvme_set_error_page(n, sq->sqid, req->cqe.cid, req->status,
+hw/block/tail:nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/tail:nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tail:nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tail:nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tail:nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_UNRECOVERED_READ,
+hw/block/tail:nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tail:nvme.c:            nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tail:nvme.c:                nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/tail:nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/tail:nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tail:nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/tail:nvme.c:            nvme_set_error_page(n, req->sq->sqid, req->cqe.cid,
+hw/block/tail:nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/tail:nvme.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/tail:nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/tail:nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/tail:nvme.c:    n->sq[sq->sqid] = NULL;
+hw/block/tail:nvme.c:    timer_del(sq->timer);
+hw/block/tail:nvme.c:    timer_free(sq->timer);
+hw/block/tail:nvme.c:    g_free(sq->io_req);
+hw/block/tail:nvme.c:    if (sq->prp_list) {
+hw/block/tail:nvme.c:        g_free(sq->prp_list);
+hw/block/tail:nvme.c:    if (sq->sqid) {
+hw/block/tail:nvme.c:    QTAILQ_FOREACH_SAFE(req, &sq->out_req_list, entry, next) {
+hw/block/tail:nvme.c:    if (!nvme_check_cqid(n, sq->cqid)) {
+hw/block/tail:nvme.c:        cq = n->cq[sq->cqid];
+hw/block/tail:nvme.c:                QTAILQ_INSERT_TAIL(&sq->req_list, req, entry);
+hw/block/tail:nvme.c:    sq->ctrl = n;
+hw/block/tail:nvme.c:    sq->sqid = sqid;
+hw/block/tail:nvme.c:    sq->size = size;
+hw/block/tail:nvme.c:    sq->cqid = cqid;
+hw/block/tail:nvme.c:    sq->head = sq->tail = 0;
+hw/block/tail:nvme.c:    sq->phys_contig = contig;
+hw/block/tail:nvme.c:    if (sq->phys_contig) {
+hw/block/tail:nvme.c:        sq->dma_addr = dma_addr;
+hw/block/tail:nvme.c:        sq->prp_list = nvme_setup_discontig(n, dma_addr, size, n->sqe_size);
+hw/block/tail:nvme.c:        if (!sq->prp_list) {
+hw/block/tail:nvme.c:	sq->last_sq_index = 0;
+hw/block/tail:nvme.c:    sq->io_req = g_malloc0(sq->size * sizeof(*sq->io_req));
+hw/block/tail:nvme.c:	sq->io_cmd = g_malloc0(sq->size * sizeof(*sq->io_cmd));
+hw/block/tail:nvme.c:	sq->head_bitmap = g_malloc0(sq->size * sizeof(*sq->head_bitmap));
+hw/block/tail:nvme.c:    QTAILQ_INIT(&sq->req_list);
+hw/block/tail:nvme.c:    QTAILQ_INIT(&sq->out_req_list);
+hw/block/tail:nvme.c:	QTAILQ_INIT(&sq->cmd_list);
+hw/block/tail:nvme.c:    for (i = 0; i < sq->size; i++) {
+hw/block/tail:nvme.c:        sq->io_req[i].sq = sq;
+hw/block/tail:nvme.c:        QTAILQ_INSERT_TAIL(&(sq->req_list), &sq->io_req[i], entry);
+hw/block/tail:nvme.c:		sq->io_cmd[i].num = i;
+hw/block/tail:nvme.c:		sq->head_bitmap[i] = 0;
+hw/block/tail:nvme.c:        sq->arb_burst = (1 << NVME_ARB_AB(n->features.arbitration));
+hw/block/tail:nvme.c:        sq->arb_burst = NVME_ARB_HPW(n->features.arbitration) + 1;
+hw/block/tail:nvme.c:        sq->arb_burst = NVME_ARB_MPW(n->features.arbitration) + 1;
+hw/block/tail:nvme.c:        sq->arb_burst = NVME_ARB_LPW(n->features.arbitration) + 1;
+hw/block/tail:nvme.c:        sq->timer = timer_new_ns(QEMU_CLOCK_REALTIME, nvme_process_sq_admin, sq);
+hw/block/tail:nvme.c:        sq->timer = timer_new_ns(QEMU_CLOCK_REALTIME, nvme_process_sq_io, sq);
+hw/block/tail:nvme.c:		sq->db_addr = n->dbs_addr + 2 * sqid * dbbuf_entry_sz;
+hw/block/tail:nvme.c:		sq->eventidx_addr = n->eis_addr + 2 * sqid * dbbuf_entry_sz;
+hw/block/tail:nvme.c:		printf("Coperd, SQ, db_addr=%" PRIu64 ", eventidx_addr=%" PRIu64 "\n", sq->db_addr, sq->eventidx_addr);
+hw/block/tail:nvme.c:        timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + 1000000);
+hw/block/tail:nvme.c:    QTAILQ_FOREACH_SAFE(req, &sq->out_req_list, entry, next) {
+hw/block/tail:nvme.c:        if (sq->sqid) {
+hw/block/tail:nvme.c:    while ((sq->head + index) % sq->size != sq->tail) {
+hw/block/tail:nvme.c:        if (sq->phys_contig) {
+hw/block/tail:nvme.c:            addr = sq->dma_addr + ((sq->head + index) % sq->size) *
+hw/block/tail:nvme.c:            addr = nvme_discontig(sq->prp_list, (sq->head + index) % sq->size,
+hw/block/tail:nvme.c:            req = QTAILQ_FIRST(&sq->req_list);
+hw/block/tail:nvme.c:            QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/tail:nvme.c:            QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/tail:nvme.c:            nvme_enqueue_req_completion(n->cq[sq->cqid], req);
+hw/block/tail:nvme.c:            sq->db_addr = dbs_addr + 2 * i * dbbuf_entry_sz;
+hw/block/tail:nvme.c:            sq->eventidx_addr = eis_addr + 2 * i * dbbuf_entry_sz;
+hw/block/tail:nvme.c:                    i, sq->db_addr, sq->eventidx_addr);
+hw/block/tail:nvme.c:    if (sq->eventidx_addr) {
+hw/block/tail:nvme.c:        nvme_addr_write(sq->ctrl, sq->eventidx_addr, (void *)&sq->tail,
+hw/block/tail:nvme.c:            sizeof(sq->tail));
+hw/block/tail:nvme.c:    if (sq->db_addr) {
+hw/block/tail:nvme.c:        nvme_addr_read(sq->ctrl, sq->db_addr, &sq->tail, sizeof(sq->tail));
+hw/block/tail:nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/tail:nvme.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/tail:nvme.c:    while (!(nvme_sq_empty(sq) || QTAILQ_EMPTY(&sq->req_list)) &&
+hw/block/tail:nvme.c:            processed++ < sq->arb_burst) {
+hw/block/tail:nvme.c:        if (sq->phys_contig) {
+hw/block/tail:nvme.c:            addr = sq->dma_addr + sq->head * n->sqe_size;
+hw/block/tail:nvme.c:            addr = nvme_discontig(sq->prp_list, sq->head, n->page_size,
+hw/block/tail:nvme.c:        req = QTAILQ_FIRST(&sq->req_list);
+hw/block/tail:nvme.c:        QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/tail:nvme.c:        QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/tail:nvme.c:        assert(cq->cqid == req->sq->cqid && sq->sqid == 0);
+hw/block/tail:nvme.c:     * newly submitted I/Os during next sq->timer triggering
+hw/block/tail:nvme.c:    sq->completed += processed;
+hw/block/tail:nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/tail:nvme.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/tail:nvme.c:	QTAILQ_INIT(&sq->cmd_list);
+hw/block/tail:nvme.c://	sq_ptr = sq->last_sq_index;
+hw/block/tail:nvme.c:	while (sq->last_sq_index != sq->tail) {
+hw/block/tail:nvme.c:		sq->io_cmd[sq->last_sq_index].num = sq->last_sq_index;
+hw/block/tail:nvme.c:		QTAILQ_INSERT_TAIL(&(sq->cmd_list), &sq->io_cmd[sq->last_sq_index], entry);
+hw/block/tail:nvme.c:		sq->head_bitmap[sq->last_sq_index] = 0;
+hw/block/tail:nvme.c:		sq->last_sq_index = (sq->last_sq_index + 1) % sq->size;
+hw/block/tail:nvme.c:	while (!(nvme_sq_empty(sq) || QTAILQ_EMPTY(&sq->req_list)) && processed < sq->arb_burst) {
+hw/block/tail:nvme.c:		while (sq->last_sq_index != sq->tail) {
+hw/block/tail:nvme.c:			sq->io_cmd[sq->last_sq_index].num = sq->last_sq_index;
+hw/block/tail:nvme.c:			QTAILQ_INSERT_TAIL(&(sq->cmd_list), &sq->io_cmd[sq->last_sq_index], entry);
+hw/block/tail:nvme.c:			sq->head_bitmap[sq->last_sq_index] = 0;
+hw/block/tail:nvme.c:			sq->last_sq_index = (sq->last_sq_index + 1) % sq->size;
+hw/block/tail:nvme.c:		QTAILQ_FOREACH_SAFE(tq, &sq->cmd_list, entry, next)
+hw/block/tail:nvme.c:		QTAILQ_FOREACH_SAFE(req, &sq->req_list, entry, next)
+hw/block/tail:nvme.c:		printf("nvme_process_sq_io: head %d tail %d i %d cmd_cnt %d req_cnt %d\n", sq->head, sq->tail, i++, cmd_cnt, req_cnt);
+hw/block/tail:nvme.c:		QTAILQ_FOREACH_SAFE(tq, &sq->cmd_list, entry, next) {
+hw/block/tail:nvme.c://				printf("	nvme_process_sq_io: sq->head %d sq->tail %d sq->last_sq_index %d tq->num %d %p seq_num %d\n", sq->head, sq->tail, sq->last_sq_index, tq->num, tq, seq_num);
+hw/block/tail:nvme.c:			if (sq->phys_contig)
+hw/block/tail:nvme.c:				addr = sq->dma_addr + tq->num * n->sqe_size;
+hw/block/tail:nvme.c:				addr = nvme_discontig(sq->prp_list, tq->num, n->page_size, n->sqe_size);
+hw/block/tail:nvme.c:				QTAILQ_REMOVE(&sq->cmd_list, tq, entry);
+hw/block/tail:nvme.c:					QTAILQ_FOREACH_SAFE(req, &sq->req_list, entry, next) {
+hw/block/tail:nvme.c:									if (tq->num == sq->head) nvme_update_sq_head(sq);
+hw/block/tail:nvme.c:									QTAILQ_REMOVE(&sq->cmd_list, tq, entry);
+hw/block/tail:nvme.c:									QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/tail:nvme.c:									QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/tail:nvme.c:									sq->head_bitmap[tq->num] = 1;
+hw/block/tail:nvme.c:					QTAILQ_FOREACH_SAFE(req, &sq->req_list, entry, next) {
+hw/block/tail:nvme.c:									if (tq->num == sq->head) nvme_update_sq_head(sq);
+hw/block/tail:nvme.c:									QTAILQ_REMOVE(&sq->cmd_list, tq, entry);
+hw/block/tail:nvme.c:									QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/tail:nvme.c:									QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/tail:nvme.c:									sq->head_bitmap[tq->num] = 1;
+hw/block/tail:nvme.c:							QTAILQ_FOREACH_SAFE(req, &sq->req_list, entry, next) {
+hw/block/tail:nvme.c:									if (tq->num == sq->head) nvme_update_sq_head(sq);
+hw/block/tail:nvme.c:									QTAILQ_REMOVE(&sq->cmd_list, tq, entry);
+hw/block/tail:nvme.c:									QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/tail:nvme.c:									QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/tail:nvme.c:									sq->head_bitmap[tq->num] = 1;
+hw/block/tail:nvme.c:				QTAILQ_FOREACH_SAFE(req, &sq->req_list, entry, next) {
+hw/block/tail:nvme.c:						if (tq->num == sq->head) nvme_update_sq_head(sq);
+hw/block/tail:nvme.c:						QTAILQ_REMOVE(&sq->cmd_list, tq, entry);
+hw/block/tail:nvme.c:						QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/tail:nvme.c:						QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/tail:nvme.c:						sq->head_bitmap[tq->num] = 1;
+hw/block/tail:nvme.c:    while (!(nvme_sq_empty(sq) || QTAILQ_EMPTY(&sq->req_list)) &&
+hw/block/tail:nvme.c:            processed++ < sq->arb_burst) {
+hw/block/tail:nvme.c:        if (sq->phys_contig) {
+hw/block/tail:nvme.c:            addr = sq->dma_addr + sq->head * n->sqe_size;
+hw/block/tail:nvme.c:            addr = nvme_discontig(sq->prp_list, sq->head, n->page_size,
+hw/block/tail:nvme.c:        req = QTAILQ_FIRST(&sq->req_list);
+hw/block/tail:nvme.c:        QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/tail:nvme.c:        QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/tail:nvme.c:     * newly submitted I/Os during next sq->timer triggering
+hw/block/tail:nvme.c:    sq->completed += processed;
+hw/block/tail:nvme.c:    timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + SQ_POLLING_PERIOD_NS);
+hw/block/tail:nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/tail:nvme.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/tail:nvme.c:    while (!(nvme_sq_empty(sq) || QTAILQ_EMPTY(&sq->req_list)) &&
+hw/block/tail:nvme.c:            processed++ < sq->arb_burst) {
+hw/block/tail:nvme.c:        if (sq->phys_contig) {
+hw/block/tail:nvme.c:            addr = sq->dma_addr + sq->head * n->sqe_size;
+hw/block/tail:nvme.c:            addr = nvme_discontig(sq->prp_list, sq->head, n->page_size,
+hw/block/tail:nvme.c:        req = QTAILQ_FIRST(&sq->req_list);
+hw/block/tail:nvme.c:        QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/tail:nvme.c:        QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/tail:nvme.c:        status = sq->sqid ? nvme_io_cmd(n, &cmd, req) :
+hw/block/tail:nvme.c:     * newly submitted I/Os during next sq->timer triggering
+hw/block/tail:nvme.c:    sq->completed += processed;
+hw/block/tail:nvme.c:    if (sq->sqid) {
+hw/block/tail:nvme.c:        timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + 10000);
+hw/block/tail:nvme.c:                if (!timer_pending(sq->timer)) {
+hw/block/tail:nvme.c:                    if (sq->sqid == 0)
+hw/block/tail:nvme.c:                        timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + 500);
+hw/block/tail:nvme.c:        if (new_val >= sq->size) {
+hw/block/tail:nvme.c:        if (!sq->db_addr) {
+hw/block/tail:nvme.c:            sq->tail = new_val;
+hw/block/tail:nvme.c:        if (!timer_pending(sq->timer)) {
+hw/block/tail:nvme.c:            if (sq->sqid == 0)
+hw/block/tail:nvme.c:                timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + 500);
+hw/block/diff.diff:< 		sq->head_bitmap[req->cmd_idx] = 2;
+hw/block/diff.diff:> 		sq->head_bitmap[req->cmd_idx] = 3;
+hw/block/diff.diff:< 		if (sq->head_bitmap[idx] != 2)
+hw/block/diff.diff:> 		if (sq->head_bitmap[idx] != 3)
+hw/block/diff.diff:< //	printf("nvme_update_sq_head: sq->head %d new head %d\n", sq->head, idx);
+hw/block/diff.diff:<     assert(cq->cqid == req->sq->cqid);
+hw/block/diff.diff:<     QTAILQ_REMOVE(&req->sq->out_req_list, req, entry);
+hw/block/diff.diff:<     notify = coalesce_disabled || !req->sq->sqid || !time_ns ||
+hw/block/diff.diff:<         nvme_set_error_page(n, sq->sqid, req->cqe.cid, req->status,
+hw/block/diff.diff:<     NvmeCtrl *n = sq->ctrl;
+hw/block/diff.diff:<     NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/diff.diff:> 	NvmeCtrl *n = sq->ctrl;
+hw/block/diff.diff:> 	NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/diff.diff:< /* 	if(sq->head > sq->tail && (1024 - sq->head + sq->tail) > MAX_MIXED_COUNT) {
+hw/block/diff.diff:< 		printf("MIXED - %u-%u\n", sq->head, sq->tail);
+hw/block/diff.diff:< 	else if(sq->head <= sq->tail && (sq->tail - sq->head) > MAX_MIXED_COUNT) {
+hw/block/diff.diff:< 		printf("MIXED - %u-%u\n", sq->head, sq->tail);
+hw/block/diff.diff:<             printf("nvme_process_sq_io: start sq->head %d sq->tail %d\n", sq->head, sq->tail);
+hw/block/diff.diff:< 					sq->head_bitmap[req->cmd_idx] = 1;
+hw/block/diff.diff:< 					sq->head_bitmap[req->cmd_idx] = 1;
+hw/block/diff.diff:> 				sq->head_bitmap[req->cmd_idx] = 1;
+hw/block/diff.diff:< 			if (sq->head_bitmap[req->cmd_idx] != 1) {
+hw/block/diff.diff:> 			if (sq->head_bitmap[req->cmd_idx] == 0 || sq->head_bitmap[req->cmd_idx] == 3) {
+hw/block/diff.diff:> 				if(sq->head_bitmap[req->cmd_idx] == 1) {
+hw/block/diff.diff:> 						sq->head_bitmap[req->cmd_idx] = 2;
+hw/block/diff.diff:< 					printf("nvme_process_sq_io: head %d tail %d cmd_idx %d bitmap: %d bank %d lbn %d lpoff %d off_in_page %d   %d-%d  isIM %u\n", sq->head, sq->tail, req->cmd_idx, sq->head_bitmap[req->cmd_idx], bank, lbn, lpoff, off_in_page, (lpn * sc->LPAGE_PER_PPAGE) / (sc->PAGE_NB * sc->LPAGE_PER_PPAGE * sc->NUM_BANKS), (lpn*sc->LPAGE_PER_PPAGE + off_in_page) % (sc->PAGE_NB * sc->LPAGE_PER_PPAGE * sc->NUM_BANKS), sector_nb == ADDR_INTERNAL_MERGE);
+hw/block/diff.diff:< 								sq->head_bitmap[req->cmd_idx]  = 1;
+hw/block/diff.diff:< 						printf("Finish	READ? %d tail %d cmd_idx %d haed_bitmap: %u bank %d lbn %d lpoff %d off_in_page %d   %d-%d  isIM %u   %x\n", sq->head, sq->tail, req->cmd_idx, sq->head_bitmap[req->cmd_idx], bank, lbn, lpoff, off_in_page, (lpn * sc->LPAGE_PER_PPAGE) / (sc->LPAGE_PER_PPAGE * sc->PAGE_NB * sc->NUM_BANKS), (lpn*sc->LPAGE_PER_PPAGE + off_in_page) % (sc->LPAGE_PER_PPAGE * sc->PAGE_NB * sc->NUM_BANKS), sector_nb == ADDR_INTERNAL_MERGE, rw);
+hw/block/diff.diff:< 								printf("NonFinish	READ? %d tail %d cmd_idx %d haed_bitmap: %u bank %d lbn %d lpoff %d off_in_page %d   %d-%d  isIM %u   %x\n", sq->head, sq->tail, req->cmd_idx, sq->head_bitmap[req->cmd_idx], bank, lbn, lpoff, off_in_page, (lpn * sc->LPAGE_PER_PPAGE) / (sc->LPAGE_PER_PPAGE * sc->PAGE_NB * sc->NUM_BANKS), (lpn*sc->LPAGE_PER_PPAGE + off_in_page) % (sc->LPAGE_PER_PPAGE * sc->PAGE_NB * sc->NUM_BANKS), sector_nb == ADDR_INTERNAL_MERGE, rw);
+hw/block/diff.diff:< 							printf("Finish	READ? %d tail %d cmd_idx %d haed_bitmap: %u bank %d lbn %d lpoff %d off_in_page %d   %d-%d  isIM %u   %x\n", sq->head, sq->tail, req->cmd_idx, sq->head_bitmap[req->cmd_idx], bank, lbn, lpoff, off_in_page, (lpn * sc->LPAGE_PER_PPAGE) / (sc->LPAGE_PER_PPAGE * sc->PAGE_NB * sc->NUM_BANKS), (lpn*sc->LPAGE_PER_PPAGE + off_in_page) % (sc->LPAGE_PER_PPAGE * sc->PAGE_NB * sc->NUM_BANKS), sector_nb == ADDR_INTERNAL_MERGE, rw);
+hw/block/diff.diff:> 						sq->head_bitmap[req->cmd_idx] = 2;
+hw/block/diff.diff:<      * newly submitted I/Os during next sq->timer triggering
+hw/block/diff.diff:<     sq->completed += processed;
+hw/block/diff.diff:< 	if(last_tail == sq->tail)
+hw/block/diff.diff:< 		last_tail = sq->tail;
+hw/block/diff.diff:<     timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + SQ_POLLING_PERIOD_NS);
+hw/block/diff.diff:<     NvmeCtrl *n = sq->ctrl;
+hw/block/diff.diff:<     NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/diff.diff:<     while (!(nvme_sq_empty(sq) || QTAILQ_EMPTY(&sq->req_list)) &&
+hw/block/diff.diff:<             processed++ < sq->arb_burst) {
+hw/block/diff.diff:<         if (sq->phys_contig) {
+hw/block/diff.diff:<             addr = sq->dma_addr + sq->head * n->sqe_size;
+hw/block/diff.diff:<             addr = nvme_discontig(sq->prp_list, sq->head, n->page_size,
+hw/block/diff.diff:<         req = QTAILQ_FIRST(&sq->req_list);
+hw/block/diff.diff:<         QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/diff.diff:<         QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/diff.diff:<         status = sq->sqid ? nvme_io_cmd(n, &cmd, req) :
+hw/block/diff.diff:> 	 * newly submitted I/Os during next sq->timer triggering
+hw/block/diff.diff:> 	sq->completed += processed;
+hw/block/diff.diff:> 	timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + SQ_POLLING_PERIOD_NS);
+hw/block/diff.diff:<      * newly submitted I/Os during next sq->timer triggering
+hw/block/diff.diff:<     sq->completed += processed;
+hw/block/diff.diff:<     if (sq->sqid) {
+hw/block/diff.diff:<         timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + 10000);
+hw/block/femu/femu-oc.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/femu/femu-oc.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/femu/femu-oc.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/femu/femu-oc.c:            nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/femu/femu-oc.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/femu/femu-oc.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/femu/femu-oc.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/femu/femu-oc.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid,
+hw/block/femu/femu-oc.c:            nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/femu/femu-oc.c:    //NvmeCtrl *n = sq->ctrl;
+hw/block/femu/femu-oc.c:    //NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/nvme.c:	QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/nvme.c:	QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/nvme.c:		sq->head_bitmap[req->cmd_idx] = 3;
+hw/block/nvme.c:	if (req->cmd_idx == sq->head) nvme_update_sq_head(sq);
+hw/block/nvme.c:    sq->head = (sq->head + 1) % sq->size;
+hw/block/nvme.c:// SOMM: Update the sq->head by referring to the sq->head_bitmap.
+hw/block/nvme.c:	int idx = sq->head % sq->size;
+hw/block/nvme.c:	while (idx != sq->tail) {
+hw/block/nvme.c:		if (sq->head_bitmap[idx] != 3)
+hw/block/nvme.c:		sq->head_bitmap[idx] = 0;
+hw/block/nvme.c:		idx = (idx + 1) % sq->size;
+hw/block/nvme.c:	sq->head = idx;
+hw/block/nvme.c:    return sq->head == sq->tail;
+hw/block/nvme.c:    cqe->sq_id = cpu_to_le16(sq->sqid);
+hw/block/nvme.c:    cqe->sq_head = cpu_to_le16(sq->head);
+hw/block/nvme.c:    QTAILQ_INSERT_TAIL(&sq->req_list, req, entry);
+hw/block/nvme.c:	assert(cq->cqid == req->sq->cqid);
+hw/block/nvme.c:	QTAILQ_REMOVE(&req->sq->out_req_list, req, entry);
+hw/block/nvme.c:    assert(cq->cqid == req->sq->cqid);
+hw/block/nvme.c:    QTAILQ_REMOVE(&req->sq->out_req_list, req, entry);
+hw/block/nvme.c:    assert(cq->cqid == req->sq->cqid);
+hw/block/nvme.c:    QTAILQ_REMOVE(&req->sq->out_req_list, req, entry);
+hw/block/nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/nvme.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_UNRECOVERED_READ,
+hw/block/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/nvme.c:            nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/nvme.c:                nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/nvme.c:            nvme_set_error_page(n, req->sq->sqid, req->cqe.cid,
+hw/block/nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/nvme.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/nvme.c:    n->sq[sq->sqid] = NULL;
+hw/block/nvme.c:    timer_del(sq->timer);
+hw/block/nvme.c:    timer_free(sq->timer);
+hw/block/nvme.c:    g_free(sq->io_req);
+hw/block/nvme.c:    if (sq->prp_list) {
+hw/block/nvme.c:        g_free(sq->prp_list);
+hw/block/nvme.c:    if (sq->sqid) {
+hw/block/nvme.c:    QTAILQ_FOREACH_SAFE(req, &sq->out_req_list, entry, next) {
+hw/block/nvme.c:    if (!nvme_check_cqid(n, sq->cqid)) {
+hw/block/nvme.c:        cq = n->cq[sq->cqid];
+hw/block/nvme.c:                QTAILQ_INSERT_TAIL(&sq->req_list, req, entry);
+hw/block/nvme.c:    sq->ctrl = n;
+hw/block/nvme.c:    sq->sqid = sqid;
+hw/block/nvme.c:    sq->size = size;
+hw/block/nvme.c:    sq->cqid = cqid;
+hw/block/nvme.c:    sq->head = sq->tail = 0;
+hw/block/nvme.c:    sq->phys_contig = contig;
+hw/block/nvme.c:    if (sq->phys_contig) {
+hw/block/nvme.c:        sq->dma_addr = dma_addr;
+hw/block/nvme.c:        sq->prp_list = nvme_setup_discontig(n, dma_addr, size, n->sqe_size);
+hw/block/nvme.c:        if (!sq->prp_list) {
+hw/block/nvme.c:	sq->last_sq_index = 0;
+hw/block/nvme.c:    sq->io_req = g_malloc0(sq->size * sizeof(*sq->io_req));
+hw/block/nvme.c:	sq->io_cmd = g_malloc0(sq->size * sizeof(*sq->io_cmd));
+hw/block/nvme.c:	sq->head_bitmap = g_malloc0(sq->size * sizeof(*sq->head_bitmap));
+hw/block/nvme.c:    QTAILQ_INIT(&sq->req_list);
+hw/block/nvme.c:    QTAILQ_INIT(&sq->out_req_list);
+hw/block/nvme.c:	QTAILQ_INIT(&sq->cmd_list);
+hw/block/nvme.c:    for (i = 0; i < sq->size; i++) {
+hw/block/nvme.c:        sq->io_req[i].sq = sq;
+hw/block/nvme.c:	sq->io_req[i].cmd_idx = i;
+hw/block/nvme.c:        QTAILQ_INSERT_TAIL(&(sq->req_list), &sq->io_req[i], entry);
+hw/block/nvme.c:		sq->io_cmd[i].num = i;
+hw/block/nvme.c:		sq->head_bitmap[i] = 0;
+hw/block/nvme.c:	sq->io_req[i].completed = 1;
+hw/block/nvme.c:        sq->arb_burst = (1 << NVME_ARB_AB(n->features.arbitration));
+hw/block/nvme.c:        sq->arb_burst = NVME_ARB_HPW(n->features.arbitration) + 1;
+hw/block/nvme.c:        sq->arb_burst = NVME_ARB_MPW(n->features.arbitration) + 1;
+hw/block/nvme.c:        sq->arb_burst = NVME_ARB_LPW(n->features.arbitration) + 1;
+hw/block/nvme.c:        sq->timer = timer_new_ns(QEMU_CLOCK_REALTIME, nvme_process_sq_admin, sq);
+hw/block/nvme.c:        sq->timer = timer_new_ns(QEMU_CLOCK_REALTIME, nvme_process_sq_io, sq);
+hw/block/nvme.c:		sq->db_addr = n->dbs_addr + 2 * sqid * dbbuf_entry_sz;
+hw/block/nvme.c:		sq->eventidx_addr = n->eis_addr + 2 * sqid * dbbuf_entry_sz;
+hw/block/nvme.c:		printf("Coperd, SQ, db_addr=%" PRIu64 ", eventidx_addr=%" PRIu64 "\n", sq->db_addr, sq->eventidx_addr);
+hw/block/nvme.c:        timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + 1000000);
+hw/block/nvme.c:    QTAILQ_FOREACH_SAFE(req, &sq->out_req_list, entry, next) {
+hw/block/nvme.c:        if (sq->sqid) {
+hw/block/nvme.c:    while ((sq->head + index) % sq->size != sq->tail) {
+hw/block/nvme.c:        if (sq->phys_contig) {
+hw/block/nvme.c:            addr = sq->dma_addr + ((sq->head + index) % sq->size) *
+hw/block/nvme.c:            addr = nvme_discontig(sq->prp_list, (sq->head + index) % sq->size,
+hw/block/nvme.c:            req = QTAILQ_FIRST(&sq->req_list);
+hw/block/nvme.c:            QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/nvme.c:            QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/nvme.c:            nvme_enqueue_req_completion(n->cq[sq->cqid], req);
+hw/block/nvme.c:            sq->db_addr = dbs_addr + 2 * i * dbbuf_entry_sz;
+hw/block/nvme.c:            sq->eventidx_addr = eis_addr + 2 * i * dbbuf_entry_sz;
+hw/block/nvme.c:                    i, sq->db_addr, sq->eventidx_addr);
+hw/block/nvme.c:    if (sq->eventidx_addr) {
+hw/block/nvme.c:        nvme_addr_write(sq->ctrl, sq->eventidx_addr, (void *)&sq->tail,
+hw/block/nvme.c:            sizeof(sq->tail));
+hw/block/nvme.c:    if (sq->db_addr) {
+hw/block/nvme.c:        nvme_addr_read(sq->ctrl, sq->db_addr, &sq->tail, sizeof(sq->tail));
+hw/block/nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/nvme.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/nvme.c:    while (!(nvme_sq_empty(sq) || QTAILQ_EMPTY(&sq->req_list)) &&
+hw/block/nvme.c:            processed++ < sq->arb_burst) {
+hw/block/nvme.c:        if (sq->phys_contig) {
+hw/block/nvme.c:            addr = sq->dma_addr + sq->head * n->sqe_size;
+hw/block/nvme.c:            addr = nvme_discontig(sq->prp_list, sq->head, n->page_size,
+hw/block/nvme.c:        req = QTAILQ_FIRST(&sq->req_list);
+hw/block/nvme.c:        QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/nvme.c:        QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/nvme.c:        assert(cq->cqid == req->sq->cqid && sq->sqid == 0);
+hw/block/nvme.c:     * newly submitted I/Os during next sq->timer triggering
+hw/block/nvme.c:    sq->completed += processed;
+hw/block/nvme.c:	NvmeCtrl *n = sq->ctrl;
+hw/block/nvme.c:	NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/nvme.c:	if (!(nvme_sq_empty(sq) || QTAILQ_EMPTY(&sq->req_list)) && processed++ < sq->arb_burst) {
+hw/block/nvme.c:		for(cmd_off_iter = sq->head; cmd_off_iter != sq->tail; cmd_off_iter = (cmd_off_iter + 1) % sq->size) {
+hw/block/nvme.c:			req = &sq->io_req[cmd_off_iter];
+hw/block/nvme.c:			if (sq->phys_contig)
+hw/block/nvme.c:				addr = sq->dma_addr + req_idx * n->sqe_size;
+hw/block/nvme.c:				addr = nvme_discontig(sq->prp_list, req_idx, n->page_size, n->sqe_size);
+hw/block/nvme.c:			if(sq->head_bitmap[req->cmd_idx] == 0 && req->completed == 1) {
+hw/block/nvme.c:				sq->head_bitmap[req->cmd_idx] = 1;
+hw/block/nvme.c:			} else if(sq->head_bitmap[req->cmd_idx] == 0 && req->completed == 0) {
+hw/block/nvme.c:		for(cmd_off_iter = sq->head; cmd_off_iter != sq->tail; cmd_off_iter = (cmd_off_iter + 1) % sq->size) {
+hw/block/nvme.c:			req = &sq->io_req[cmd_off_iter];
+hw/block/nvme.c:			if (sq->head_bitmap[req->cmd_idx] == 0 || sq->head_bitmap[req->cmd_idx] == 3) {
+hw/block/nvme.c:				if(sq->head_bitmap[req->cmd_idx] == 1) {
+hw/block/nvme.c:						sq->head_bitmap[req->cmd_idx] = 2;
+hw/block/nvme.c:                                        printf("nvme_process_sq_io: head %d tail %d cmd_idx %d bitmap: %d bank %d lbn %d off_in_page %d   %d-%d  isIM %u\n", sq->head, sq->tail, req->cmd_idx, sq->head_bitmap[req->cmd_idx], bank, lbn, off_in_page, (lpn * sc->LPAGE_PER_PPAGE) / (sc->PAGE_NB * sc->LPAGE_PER_PPAGE * sc->NUM_BANKS), (lpn*sc->LPAGE_PER_PPAGE + off_in_page) % (sc->PAGE_NB * sc->LPAGE_PER_PPAGE * sc->NUM_BANKS), sector_nb == ADDR_INTERNAL_MERGE);
+hw/block/nvme.c:						sq->head_bitmap[req->cmd_idx] = 2;
+hw/block/nvme.c:	 * newly submitted I/Os during next sq->timer triggering
+hw/block/nvme.c:	sq->completed += processed;
+hw/block/nvme.c:/*	if(last_tail == sq->tail) {
+hw/block/nvme.c:                last_tail = sq->tail;
+hw/block/nvme.c:	timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + SQ_POLLING_PERIOD_NS);
+hw/block/nvme.c:                if (!timer_pending(sq->timer)) {
+hw/block/nvme.c:                    if (sq->sqid == 0)
+hw/block/nvme.c:                        timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + 500);
+hw/block/nvme.c:        if (new_val >= sq->size) {
+hw/block/nvme.c:        if (!sq->db_addr) {
+hw/block/nvme.c:            sq->tail = new_val;
+hw/block/nvme.c:        if (!timer_pending(sq->timer)) {
+hw/block/nvme.c:            if (sq->sqid == 0)
+hw/block/nvme.c:                timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + 500);
+hw/block/backup_files/nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/backup_files/nvme.c:	QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/backup_files/nvme.c:	QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/backup_files/nvme.c:		sq->head_bitmap[req->cmd_idx] = 2;
+hw/block/backup_files/nvme.c:	if (req->cmd_idx == sq->head) nvme_update_sq_head(sq);
+hw/block/backup_files/nvme.c:    sq->head = (sq->head + 1) % sq->size;
+hw/block/backup_files/nvme.c:// SOMM: Update the sq->head by referring to the sq->head_bitmap.
+hw/block/backup_files/nvme.c:	int idx = sq->head % sq->size;
+hw/block/backup_files/nvme.c:	while (idx != sq->tail) {
+hw/block/backup_files/nvme.c:		if (sq->head_bitmap[idx] != 2)
+hw/block/backup_files/nvme.c:		sq->head_bitmap[idx] = 0;
+hw/block/backup_files/nvme.c:		idx = (idx + 1) % sq->size;
+hw/block/backup_files/nvme.c://	printf("nvme_update_sq_head: sq->head %d new head %d\n", sq->head, idx);
+hw/block/backup_files/nvme.c:	sq->head = idx;
+hw/block/backup_files/nvme.c:    return sq->head == sq->tail;
+hw/block/backup_files/nvme.c:    cqe->sq_id = cpu_to_le16(sq->sqid);
+hw/block/backup_files/nvme.c:    cqe->sq_head = cpu_to_le16(sq->head);
+hw/block/backup_files/nvme.c:    QTAILQ_INSERT_TAIL(&sq->req_list, req, entry);
+hw/block/backup_files/nvme.c:	assert(cq->cqid == req->sq->cqid);
+hw/block/backup_files/nvme.c:	QTAILQ_REMOVE(&req->sq->out_req_list, req, entry);
+hw/block/backup_files/nvme.c:    assert(cq->cqid == req->sq->cqid);
+hw/block/backup_files/nvme.c:    QTAILQ_REMOVE(&req->sq->out_req_list, req, entry);
+hw/block/backup_files/nvme.c:    assert(cq->cqid == req->sq->cqid);
+hw/block/backup_files/nvme.c:    QTAILQ_REMOVE(&req->sq->out_req_list, req, entry);
+hw/block/backup_files/nvme.c:    assert(cq->cqid == req->sq->cqid);
+hw/block/backup_files/nvme.c:    QTAILQ_REMOVE(&req->sq->out_req_list, req, entry);
+hw/block/backup_files/nvme.c:    notify = coalesce_disabled || !req->sq->sqid || !time_ns ||
+hw/block/backup_files/nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/backup_files/nvme.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/backup_files/nvme.c:        nvme_set_error_page(n, sq->sqid, req->cqe.cid, req->status,
+hw/block/backup_files/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/backup_files/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/backup_files/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/backup_files/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/backup_files/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_UNRECOVERED_READ,
+hw/block/backup_files/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/backup_files/nvme.c:            nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/backup_files/nvme.c:                nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/backup_files/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/backup_files/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/backup_files/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_INVALID_FIELD,
+hw/block/backup_files/nvme.c:            nvme_set_error_page(n, req->sq->sqid, req->cqe.cid,
+hw/block/backup_files/nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/backup_files/nvme.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/backup_files/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/backup_files/nvme.c:        nvme_set_error_page(n, req->sq->sqid, cmd->cid, NVME_LBA_RANGE,
+hw/block/backup_files/nvme.c:    n->sq[sq->sqid] = NULL;
+hw/block/backup_files/nvme.c:    timer_del(sq->timer);
+hw/block/backup_files/nvme.c:    timer_free(sq->timer);
+hw/block/backup_files/nvme.c:    g_free(sq->io_req);
+hw/block/backup_files/nvme.c:    if (sq->prp_list) {
+hw/block/backup_files/nvme.c:        g_free(sq->prp_list);
+hw/block/backup_files/nvme.c:    if (sq->sqid) {
+hw/block/backup_files/nvme.c:    QTAILQ_FOREACH_SAFE(req, &sq->out_req_list, entry, next) {
+hw/block/backup_files/nvme.c:    if (!nvme_check_cqid(n, sq->cqid)) {
+hw/block/backup_files/nvme.c:        cq = n->cq[sq->cqid];
+hw/block/backup_files/nvme.c:                QTAILQ_INSERT_TAIL(&sq->req_list, req, entry);
+hw/block/backup_files/nvme.c:    sq->ctrl = n;
+hw/block/backup_files/nvme.c:    sq->sqid = sqid;
+hw/block/backup_files/nvme.c:    sq->size = size;
+hw/block/backup_files/nvme.c:    sq->cqid = cqid;
+hw/block/backup_files/nvme.c:    sq->head = sq->tail = 0;
+hw/block/backup_files/nvme.c:    sq->phys_contig = contig;
+hw/block/backup_files/nvme.c:    if (sq->phys_contig) {
+hw/block/backup_files/nvme.c:        sq->dma_addr = dma_addr;
+hw/block/backup_files/nvme.c:        sq->prp_list = nvme_setup_discontig(n, dma_addr, size, n->sqe_size);
+hw/block/backup_files/nvme.c:        if (!sq->prp_list) {
+hw/block/backup_files/nvme.c:	sq->last_sq_index = 0;
+hw/block/backup_files/nvme.c:    sq->io_req = g_malloc0(sq->size * sizeof(*sq->io_req));
+hw/block/backup_files/nvme.c:	sq->io_cmd = g_malloc0(sq->size * sizeof(*sq->io_cmd));
+hw/block/backup_files/nvme.c:	sq->head_bitmap = g_malloc0(sq->size * sizeof(*sq->head_bitmap));
+hw/block/backup_files/nvme.c:    QTAILQ_INIT(&sq->req_list);
+hw/block/backup_files/nvme.c:    QTAILQ_INIT(&sq->out_req_list);
+hw/block/backup_files/nvme.c:	QTAILQ_INIT(&sq->cmd_list);
+hw/block/backup_files/nvme.c:    for (i = 0; i < sq->size; i++) {
+hw/block/backup_files/nvme.c:        sq->io_req[i].sq = sq;
+hw/block/backup_files/nvme.c:	sq->io_req[i].cmd_idx = i;
+hw/block/backup_files/nvme.c:        QTAILQ_INSERT_TAIL(&(sq->req_list), &sq->io_req[i], entry);
+hw/block/backup_files/nvme.c:		sq->io_cmd[i].num = i;
+hw/block/backup_files/nvme.c:		sq->head_bitmap[i] = 0;
+hw/block/backup_files/nvme.c:        sq->arb_burst = (1 << NVME_ARB_AB(n->features.arbitration));
+hw/block/backup_files/nvme.c:        sq->arb_burst = NVME_ARB_HPW(n->features.arbitration) + 1;
+hw/block/backup_files/nvme.c:        sq->arb_burst = NVME_ARB_MPW(n->features.arbitration) + 1;
+hw/block/backup_files/nvme.c:        sq->arb_burst = NVME_ARB_LPW(n->features.arbitration) + 1;
+hw/block/backup_files/nvme.c:        sq->timer = timer_new_ns(QEMU_CLOCK_REALTIME, nvme_process_sq_admin, sq);
+hw/block/backup_files/nvme.c:        sq->timer = timer_new_ns(QEMU_CLOCK_REALTIME, nvme_process_sq_io, sq);
+hw/block/backup_files/nvme.c:		sq->db_addr = n->dbs_addr + 2 * sqid * dbbuf_entry_sz;
+hw/block/backup_files/nvme.c:		sq->eventidx_addr = n->eis_addr + 2 * sqid * dbbuf_entry_sz;
+hw/block/backup_files/nvme.c:		printf("Coperd, SQ, db_addr=%" PRIu64 ", eventidx_addr=%" PRIu64 "\n", sq->db_addr, sq->eventidx_addr);
+hw/block/backup_files/nvme.c:        timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + 1000000);
+hw/block/backup_files/nvme.c:    QTAILQ_FOREACH_SAFE(req, &sq->out_req_list, entry, next) {
+hw/block/backup_files/nvme.c:        if (sq->sqid) {
+hw/block/backup_files/nvme.c:    while ((sq->head + index) % sq->size != sq->tail) {
+hw/block/backup_files/nvme.c:        if (sq->phys_contig) {
+hw/block/backup_files/nvme.c:            addr = sq->dma_addr + ((sq->head + index) % sq->size) *
+hw/block/backup_files/nvme.c:            addr = nvme_discontig(sq->prp_list, (sq->head + index) % sq->size,
+hw/block/backup_files/nvme.c:            req = QTAILQ_FIRST(&sq->req_list);
+hw/block/backup_files/nvme.c:            QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/backup_files/nvme.c:            QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/backup_files/nvme.c:            nvme_enqueue_req_completion(n->cq[sq->cqid], req);
+hw/block/backup_files/nvme.c:            sq->db_addr = dbs_addr + 2 * i * dbbuf_entry_sz;
+hw/block/backup_files/nvme.c:            sq->eventidx_addr = eis_addr + 2 * i * dbbuf_entry_sz;
+hw/block/backup_files/nvme.c:                    i, sq->db_addr, sq->eventidx_addr);
+hw/block/backup_files/nvme.c:    if (sq->eventidx_addr) {
+hw/block/backup_files/nvme.c:        nvme_addr_write(sq->ctrl, sq->eventidx_addr, (void *)&sq->tail,
+hw/block/backup_files/nvme.c:            sizeof(sq->tail));
+hw/block/backup_files/nvme.c:    if (sq->db_addr) {
+hw/block/backup_files/nvme.c:        nvme_addr_read(sq->ctrl, sq->db_addr, &sq->tail, sizeof(sq->tail));
+hw/block/backup_files/nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/backup_files/nvme.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/backup_files/nvme.c:    while (!(nvme_sq_empty(sq) || QTAILQ_EMPTY(&sq->req_list)) &&
+hw/block/backup_files/nvme.c:            processed++ < sq->arb_burst) {
+hw/block/backup_files/nvme.c:        if (sq->phys_contig) {
+hw/block/backup_files/nvme.c:            addr = sq->dma_addr + sq->head * n->sqe_size;
+hw/block/backup_files/nvme.c:            addr = nvme_discontig(sq->prp_list, sq->head, n->page_size,
+hw/block/backup_files/nvme.c:        req = QTAILQ_FIRST(&sq->req_list);
+hw/block/backup_files/nvme.c:        QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/backup_files/nvme.c:        QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/backup_files/nvme.c:        assert(cq->cqid == req->sq->cqid && sq->sqid == 0);
+hw/block/backup_files/nvme.c:     * newly submitted I/Os during next sq->timer triggering
+hw/block/backup_files/nvme.c:    sq->completed += processed;
+hw/block/backup_files/nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/backup_files/nvme.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/backup_files/nvme.c:/* 	if(sq->head > sq->tail && (1024 - sq->head + sq->tail) > MAX_MIXED_COUNT) {
+hw/block/backup_files/nvme.c:		printf("MIXED - %u-%u\n", sq->head, sq->tail);
+hw/block/backup_files/nvme.c:	else if(sq->head <= sq->tail && (sq->tail - sq->head) > MAX_MIXED_COUNT) {
+hw/block/backup_files/nvme.c:		printf("MIXED - %u-%u\n", sq->head, sq->tail);
+hw/block/backup_files/nvme.c:	if (!(nvme_sq_empty(sq) || QTAILQ_EMPTY(&sq->req_list)) && processed++ < sq->arb_burst) {
+hw/block/backup_files/nvme.c:            printf("nvme_process_sq_io: start sq->head %d sq->tail %d\n", sq->head, sq->tail);
+hw/block/backup_files/nvme.c:		for(cmd_off_iter = sq->head; cmd_off_iter != sq->tail; cmd_off_iter = (cmd_off_iter + 1) % sq->size) {
+hw/block/backup_files/nvme.c:			req = &sq->io_req[cmd_off_iter];
+hw/block/backup_files/nvme.c:			if (sq->phys_contig)
+hw/block/backup_files/nvme.c:				addr = sq->dma_addr + req_idx * n->sqe_size;
+hw/block/backup_files/nvme.c:				addr = nvme_discontig(sq->prp_list, req_idx, n->page_size, n->sqe_size);
+hw/block/backup_files/nvme.c:			if(sq->head_bitmap[req->cmd_idx] == 0) {
+hw/block/backup_files/nvme.c:					sq->head_bitmap[req->cmd_idx] = 1;
+hw/block/backup_files/nvme.c:					sq->head_bitmap[req->cmd_idx] = 1;
+hw/block/backup_files/nvme.c:		for(cmd_off_iter = sq->head; cmd_off_iter != sq->tail; cmd_off_iter = (cmd_off_iter + 1) % sq->size) {
+hw/block/backup_files/nvme.c:			req = &sq->io_req[cmd_off_iter];
+hw/block/backup_files/nvme.c:			if (sq->head_bitmap[req->cmd_idx] != 1) {
+hw/block/backup_files/nvme.c:					printf("nvme_process_sq_io: head %d tail %d cmd_idx %d bitmap: %d bank %d lbn %d lpoff %d off_in_page %d   %d-%d  isIM %u\n", sq->head, sq->tail, req->cmd_idx, sq->head_bitmap[req->cmd_idx], bank, lbn, lpoff, off_in_page, (lpn * sc->LPAGE_PER_PPAGE) / (sc->PAGE_NB * sc->LPAGE_PER_PPAGE * sc->NUM_BANKS), (lpn*sc->LPAGE_PER_PPAGE + off_in_page) % (sc->PAGE_NB * sc->LPAGE_PER_PPAGE * sc->NUM_BANKS), sector_nb == ADDR_INTERNAL_MERGE);
+hw/block/backup_files/nvme.c:								sq->head_bitmap[req->cmd_idx]  = 1;
+hw/block/backup_files/nvme.c:						printf("Finish	READ? %d tail %d cmd_idx %d haed_bitmap: %u bank %d lbn %d lpoff %d off_in_page %d   %d-%d  isIM %u   %x\n", sq->head, sq->tail, req->cmd_idx, sq->head_bitmap[req->cmd_idx], bank, lbn, lpoff, off_in_page, (lpn * sc->LPAGE_PER_PPAGE) / (sc->LPAGE_PER_PPAGE * sc->PAGE_NB * sc->NUM_BANKS), (lpn*sc->LPAGE_PER_PPAGE + off_in_page) % (sc->LPAGE_PER_PPAGE * sc->PAGE_NB * sc->NUM_BANKS), sector_nb == ADDR_INTERNAL_MERGE, rw);
+hw/block/backup_files/nvme.c:								printf("NonFinish	READ? %d tail %d cmd_idx %d haed_bitmap: %u bank %d lbn %d lpoff %d off_in_page %d   %d-%d  isIM %u   %x\n", sq->head, sq->tail, req->cmd_idx, sq->head_bitmap[req->cmd_idx], bank, lbn, lpoff, off_in_page, (lpn * sc->LPAGE_PER_PPAGE) / (sc->LPAGE_PER_PPAGE * sc->PAGE_NB * sc->NUM_BANKS), (lpn*sc->LPAGE_PER_PPAGE + off_in_page) % (sc->LPAGE_PER_PPAGE * sc->PAGE_NB * sc->NUM_BANKS), sector_nb == ADDR_INTERNAL_MERGE, rw);
+hw/block/backup_files/nvme.c:							printf("Finish	READ? %d tail %d cmd_idx %d haed_bitmap: %u bank %d lbn %d lpoff %d off_in_page %d   %d-%d  isIM %u   %x\n", sq->head, sq->tail, req->cmd_idx, sq->head_bitmap[req->cmd_idx], bank, lbn, lpoff, off_in_page, (lpn * sc->LPAGE_PER_PPAGE) / (sc->LPAGE_PER_PPAGE * sc->PAGE_NB * sc->NUM_BANKS), (lpn*sc->LPAGE_PER_PPAGE + off_in_page) % (sc->LPAGE_PER_PPAGE * sc->PAGE_NB * sc->NUM_BANKS), sector_nb == ADDR_INTERNAL_MERGE, rw);
+hw/block/backup_files/nvme.c:     * newly submitted I/Os during next sq->timer triggering
+hw/block/backup_files/nvme.c:    sq->completed += processed;
+hw/block/backup_files/nvme.c:	if(last_tail == sq->tail)
+hw/block/backup_files/nvme.c:		last_tail = sq->tail;
+hw/block/backup_files/nvme.c:    timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + SQ_POLLING_PERIOD_NS);
+hw/block/backup_files/nvme.c:    NvmeCtrl *n = sq->ctrl;
+hw/block/backup_files/nvme.c:    NvmeCQueue *cq = n->cq[sq->cqid];
+hw/block/backup_files/nvme.c:    while (!(nvme_sq_empty(sq) || QTAILQ_EMPTY(&sq->req_list)) &&
+hw/block/backup_files/nvme.c:            processed++ < sq->arb_burst) {
+hw/block/backup_files/nvme.c:        if (sq->phys_contig) {
+hw/block/backup_files/nvme.c:            addr = sq->dma_addr + sq->head * n->sqe_size;
+hw/block/backup_files/nvme.c:            addr = nvme_discontig(sq->prp_list, sq->head, n->page_size,
+hw/block/backup_files/nvme.c:        req = QTAILQ_FIRST(&sq->req_list);
+hw/block/backup_files/nvme.c:        QTAILQ_REMOVE(&sq->req_list, req, entry);
+hw/block/backup_files/nvme.c:        QTAILQ_INSERT_TAIL(&sq->out_req_list, req, entry);
+hw/block/backup_files/nvme.c:        status = sq->sqid ? nvme_io_cmd(n, &cmd, req) :
+hw/block/backup_files/nvme.c:     * newly submitted I/Os during next sq->timer triggering
+hw/block/backup_files/nvme.c:    sq->completed += processed;
+hw/block/backup_files/nvme.c:    if (sq->sqid) {
+hw/block/backup_files/nvme.c:        timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + 10000);
+hw/block/backup_files/nvme.c:                if (!timer_pending(sq->timer)) {
+hw/block/backup_files/nvme.c:                    if (sq->sqid == 0)
+hw/block/backup_files/nvme.c:                        timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + 500);
+hw/block/backup_files/nvme.c:        if (new_val >= sq->size) {
+hw/block/backup_files/nvme.c:        if (!sq->db_addr) {
+hw/block/backup_files/nvme.c:            sq->tail = new_val;
+hw/block/backup_files/nvme.c:        if (!timer_pending(sq->timer)) {
+hw/block/backup_files/nvme.c:            if (sq->sqid == 0)
+hw/block/backup_files/nvme.c:                timer_mod(sq->timer, qemu_clock_get_ns(QEMU_CLOCK_REALTIME) + 500);
+Binary file pc-bios/efi-pcnet.rom matches

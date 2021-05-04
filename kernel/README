@@ -1,0 +1,36 @@
+Linux kernel
+============
+
+This file was moved to Documentation/admin-guide/README.rst
+
+Please notice that there are several guides for kernel developers and users.
+These guides can be rendered in a number of formats, like HTML and PDF.
+
+In order to build the documentation, use ``make htmldocs`` or
+``make pdfdocs``.
+
+There are various text files in the Documentation/ subdirectory,
+several of them using the Restructured Text markup notation.
+See Documentation/00-INDEX for a list of what is contained in each file.
+
+Please read the Documentation/process/changes.rst file, as it contains the
+requirements for building and running the kernel, and information about
+the problems which may result by upgrading your kernel.
+
+1. Configuration
+> make menuconfig
+# Options for ZNS+ (File systems >>)
+  1) Options for ZNS+ (File systems >>)
+    ZNS: Baseline technique
+    IZC: This technique uses internal zone compaction scheme.
+    HSR: This technique uses hybrid segment recycling scheme.
+  2) Copyback-aware Block allocation: This option determines whether the F2FS uses CAB or not.
+  3) All cached chunk checking: This option determines whether the F2FS uses IZC-H or not.
+
+2. Compile O/S Kernel
+> make;make modules;make modules_install;make install
+
+3. mount f2fs
+> ./mount.sh
+# If you change the file system size or segment size, you need to modify fdisk.sh and mount.sh.
+
