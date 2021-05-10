@@ -1,6 +1,6 @@
 # ZNSplus
 
-kenrel: Host kernel including F2FS
+kernel: Host kernel including F2FS
 
-femu: ZNS+ femu code
+FEMU: ZNS+ FEMU code
 
